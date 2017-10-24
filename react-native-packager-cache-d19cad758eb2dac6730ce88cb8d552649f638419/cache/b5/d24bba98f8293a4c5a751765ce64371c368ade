@@ -1,0 +1,210 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Reference = undefined;
+
+var _args = require('./implementation/args');
+
+var args = _interopRequireWildcard(_args);
+
+var _blob = require('./implementation/blob');
+
+var _error = require('./implementation/error');
+
+var errorsExports = _interopRequireWildcard(_error);
+
+var _location = require('./implementation/location');
+
+var _metadata = require('./implementation/metadata');
+
+var metadata = _interopRequireWildcard(_metadata);
+
+var _object = require('./implementation/object');
+
+var object = _interopRequireWildcard(_object);
+
+var _path = require('./implementation/path');
+
+var path = _interopRequireWildcard(_path);
+
+var _requests = require('./implementation/requests');
+
+var requests = _interopRequireWildcard(_requests);
+
+var _string = require('./implementation/string');
+
+var fbsString = _interopRequireWildcard(_string);
+
+var _type = require('./implementation/type');
+
+var type = _interopRequireWildcard(_type);
+
+var _task = require('./task');
+
+function _interopRequireWildcard(obj) {
+    if (obj && obj.__esModule) {
+        return obj;
+    } else {
+        var newObj = {};if (obj != null) {
+            for (var key in obj) {
+                if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
+            }
+        }newObj.default = obj;return newObj;
+    }
+}
+
+var Reference = function () {
+    function Reference(authWrapper, location) {
+        this.authWrapper = authWrapper;
+        if (location instanceof _location.Location) {
+            this.location = location;
+        } else {
+            this.location = _location.Location.makeFromUrl(location);
+        }
+    }
+
+    Reference.prototype.toString = function () {
+        args.validate('toString', [], arguments);
+        return 'gs://' + this.location.bucket + '/' + this.location.path;
+    };
+    Reference.prototype.newRef = function (authWrapper, location) {
+        return new Reference(authWrapper, location);
+    };
+    Reference.prototype.mappings = function () {
+        return metadata.getMappings();
+    };
+
+    Reference.prototype.child = function (childPath) {
+        args.validate('child', [args.stringSpec()], arguments);
+        var newPath = path.child(this.location.path, childPath);
+        var location = new _location.Location(this.location.bucket, newPath);
+        return this.newRef(this.authWrapper, location);
+    };
+    Object.defineProperty(Reference.prototype, "parent", {
+        get: function get() {
+            var newPath = path.parent(this.location.path);
+            if (newPath === null) {
+                return null;
+            }
+            var location = new _location.Location(this.location.bucket, newPath);
+            return this.newRef(this.authWrapper, location);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Reference.prototype, "root", {
+        get: function get() {
+            var location = new _location.Location(this.location.bucket, '');
+            return this.newRef(this.authWrapper, location);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Reference.prototype, "bucket", {
+        get: function get() {
+            return this.location.bucket;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Reference.prototype, "fullPath", {
+        get: function get() {
+            return this.location.path;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Reference.prototype, "name", {
+        get: function get() {
+            return path.lastComponent(this.location.path);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Reference.prototype, "storage", {
+        get: function get() {
+            return this.authWrapper.service();
+        },
+        enumerable: true,
+        configurable: true
+    });
+
+    Reference.prototype.put = function (data, metadata) {
+        if (metadata === void 0) {
+            metadata = null;
+        }
+        args.validate('put', [args.uploadDataSpec(), args.metadataSpec(true)], arguments);
+        this.throwIfRoot_('put');
+        return new _task.UploadTask(this, this.authWrapper, this.location, this.mappings(), new _blob.FbsBlob(data), metadata);
+    };
+
+    Reference.prototype.putString = function (string, format, opt_metadata) {
+        if (format === void 0) {
+            format = _string.StringFormat.RAW;
+        }
+        args.validate('putString', [args.stringSpec(), args.stringSpec(fbsString.formatValidator, true), args.metadataSpec(true)], arguments);
+        this.throwIfRoot_('putString');
+        var data = fbsString.dataFromString(format, string);
+        var metadata = object.clone(opt_metadata);
+        if (!type.isDef(metadata['contentType']) && type.isDef(data.contentType)) {
+            metadata['contentType'] = data.contentType;
+        }
+        return new _task.UploadTask(this, this.authWrapper, this.location, this.mappings(), new _blob.FbsBlob(data.data, true), metadata);
+    };
+
+    Reference.prototype.delete = function () {
+        args.validate('delete', [], arguments);
+        this.throwIfRoot_('delete');
+        var self = this;
+        return this.authWrapper.getAuthToken().then(function (authToken) {
+            var requestInfo = requests.deleteObject(self.authWrapper, self.location);
+            return self.authWrapper.makeRequest(requestInfo, authToken).getPromise();
+        });
+    };
+
+    Reference.prototype.getMetadata = function () {
+        args.validate('getMetadata', [], arguments);
+        this.throwIfRoot_('getMetadata');
+        var self = this;
+        return this.authWrapper.getAuthToken().then(function (authToken) {
+            var requestInfo = requests.getMetadata(self.authWrapper, self.location, self.mappings());
+            return self.authWrapper.makeRequest(requestInfo, authToken).getPromise();
+        });
+    };
+
+    Reference.prototype.updateMetadata = function (metadata) {
+        args.validate('updateMetadata', [args.metadataSpec()], arguments);
+        this.throwIfRoot_('updateMetadata');
+        var self = this;
+        return this.authWrapper.getAuthToken().then(function (authToken) {
+            var requestInfo = requests.updateMetadata(self.authWrapper, self.location, metadata, self.mappings());
+            return self.authWrapper.makeRequest(requestInfo, authToken).getPromise();
+        });
+    };
+
+    Reference.prototype.getDownloadURL = function () {
+        args.validate('getDownloadURL', [], arguments);
+        this.throwIfRoot_('getDownloadURL');
+        return this.getMetadata().then(function (metadata) {
+            var url = metadata['downloadURLs'][0];
+            if (type.isDef(url)) {
+                return url;
+            } else {
+                throw errorsExports.noDownloadURL();
+            }
+        });
+    };
+    Reference.prototype.throwIfRoot_ = function (name) {
+        if (this.location.path === '') {
+            throw errorsExports.invalidRootOperation(name);
+        }
+    };
+    return Reference;
+}();
+exports.Reference = Reference;

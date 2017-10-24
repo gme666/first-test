@@ -1,0 +1,26 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.TransactionResult = undefined;
+
+var _validation = require('../../utils/validation');
+
+var TransactionResult = function () {
+    function TransactionResult(committed, snapshot) {
+        this.committed = committed;
+        this.snapshot = snapshot;
+    }
+
+    TransactionResult.prototype.toJSON = function () {
+        (0, _validation.validateArgCount)('TransactionResult.toJSON', 0, 1, arguments.length);
+        return { committed: this.committed, snapshot: this.snapshot.toJSON() };
+    };
+    return TransactionResult;
+}();
+exports.TransactionResult = TransactionResult;

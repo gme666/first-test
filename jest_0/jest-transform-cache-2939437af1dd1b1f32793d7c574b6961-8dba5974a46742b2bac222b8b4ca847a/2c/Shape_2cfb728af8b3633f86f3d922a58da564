@@ -1,0 +1,17 @@
+dacff188d228b18488e55c2be01c65f4
+Object.defineProperty(exports,"__esModule",{value:true});var _react=require('react');
+var _SvgTouchableMixin=require('../lib/SvgTouchableMixin');var _SvgTouchableMixin2=_interopRequireDefault(_SvgTouchableMixin);
+var _lodash=require('lodash');var _lodash2=_interopRequireDefault(_lodash);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var
+
+Shape=function(_Component){_inherits(Shape,_Component);
+function Shape(){_classCallCheck(this,Shape);var _this=_possibleConstructorReturn(this,(Shape.__proto__||Object.getPrototypeOf(Shape)).apply(this,
+arguments));
+_lodash2.default.forEach(_SvgTouchableMixin2.default,function(method,key){
+_this[key]=method.bind(_this);
+});
+_this.state=_this.touchableGetInitialState();return _this;
+}return Shape;}(_react.Component);exports.default=
+
+
+Shape;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIlNoYXBlLmpzIl0sIm5hbWVzIjpbIlNoYXBlIiwiYXJndW1lbnRzIiwiZm9yRWFjaCIsIm1ldGhvZCIsImtleSIsImJpbmQiLCJzdGF0ZSIsInRvdWNoYWJsZUdldEluaXRpYWxTdGF0ZSJdLCJtYXBwaW5ncyI6InlEQUFBO0FBQ0EsMkQ7QUFDQSw4Qjs7QUFFTUEsSztBQUNGLGdCQUFjO0FBQ0RDLFNBREM7QUFFVixpQkFBRUMsT0FBRiw2QkFBNkIsU0FBQ0MsTUFBRCxDQUFTQyxHQUFULENBQWlCO0FBQzFDLE1BQUtBLEdBQUwsRUFBWUQsT0FBT0UsSUFBUCxPQUFaO0FBQ0gsQ0FGRDtBQUdBLE1BQUtDLEtBQUwsQ0FBYSxNQUFLQyx3QkFBTCxFQUFiLENBTFU7QUFNYixDOzs7QUFHVVAsSyIsImZpbGUiOiJTaGFwZS5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7Q29tcG9uZW50fSBmcm9tICdyZWFjdCc7XG5pbXBvcnQgU3ZnVG91Y2hhYmxlTWl4aW4gZnJvbSAnLi4vbGliL1N2Z1RvdWNoYWJsZU1peGluJztcbmltcG9ydCBfIGZyb20gJ2xvZGFzaCc7XG5cbmNsYXNzIFNoYXBlIGV4dGVuZHMgQ29tcG9uZW50IHtcbiAgICBjb25zdHJ1Y3RvcigpIHtcbiAgICAgICAgc3VwZXIoLi4uYXJndW1lbnRzKTtcbiAgICAgICAgXy5mb3JFYWNoKFN2Z1RvdWNoYWJsZU1peGluLCAobWV0aG9kLCBrZXkpID0+IHtcbiAgICAgICAgICAgIHRoaXNba2V5XSA9IG1ldGhvZC5iaW5kKHRoaXMpO1xuICAgICAgICB9KTtcbiAgICAgICAgdGhpcy5zdGF0ZSA9IHRoaXMudG91Y2hhYmxlR2V0SW5pdGlhbFN0YXRlKCk7XG4gICAgfVxufVxuXG5leHBvcnQgZGVmYXVsdCBTaGFwZTtcbiJdfQ==

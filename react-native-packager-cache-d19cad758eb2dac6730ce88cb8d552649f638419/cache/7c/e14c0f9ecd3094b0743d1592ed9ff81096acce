@@ -1,0 +1,86 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.KEY_INDEX = exports.KeyIndex = undefined;
+
+var _Index = require('./Index');
+
+var _Node = require('../Node');
+
+var _util = require('../../util/util');
+
+var _assert = require('../../../../utils/assert');
+
+var __extends = undefined && undefined.__extends || function () {
+    var extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function (d, b) {
+        d.__proto__ = b;
+    } || function (d, b) {
+        for (var p in b) {
+            if (b.hasOwnProperty(p)) d[p] = b[p];
+        }
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() {
+            this.constructor = d;
+        }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+}();
+
+var __EMPTY_NODE;
+var KeyIndex = function (_super) {
+    __extends(KeyIndex, _super);
+    function KeyIndex() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Object.defineProperty(KeyIndex, "__EMPTY_NODE", {
+        get: function get() {
+            return __EMPTY_NODE;
+        },
+        set: function set(val) {
+            __EMPTY_NODE = val;
+        },
+        enumerable: true,
+        configurable: true
+    });
+
+    KeyIndex.prototype.compare = function (a, b) {
+        return (0, _util.nameCompare)(a.name, b.name);
+    };
+
+    KeyIndex.prototype.isDefinedOn = function (node) {
+        throw (0, _assert.assertionError)('KeyIndex.isDefinedOn not expected to be called.');
+    };
+
+    KeyIndex.prototype.indexedValueChanged = function (oldNode, newNode) {
+        return false;
+    };
+
+    KeyIndex.prototype.minPost = function () {
+        return _Node.NamedNode.MIN;
+    };
+
+    KeyIndex.prototype.maxPost = function () {
+        return new _Node.NamedNode(_util.MAX_NAME, __EMPTY_NODE);
+    };
+
+    KeyIndex.prototype.makePost = function (indexValue, name) {
+        (0, _assert.assert)(typeof indexValue === 'string', 'KeyIndex indexValue must always be a string.');
+
+        return new _Node.NamedNode(indexValue, __EMPTY_NODE);
+    };
+
+    KeyIndex.prototype.toString = function () {
+        return '.key';
+    };
+    return KeyIndex;
+}(_Index.Index);
+exports.KeyIndex = KeyIndex;
+var KEY_INDEX = exports.KEY_INDEX = new KeyIndex();

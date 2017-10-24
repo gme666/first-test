@@ -1,0 +1,34 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Index = undefined;
+
+var _Node = require('../Node');
+
+var _util = require('../../util/util');
+
+var Index = function () {
+  function Index() {}
+
+  Index.prototype.getCompare = function () {
+    return this.compare.bind(this);
+  };
+
+  Index.prototype.indexedValueChanged = function (oldNode, newNode) {
+    var oldWrapped = new _Node.NamedNode(_util.MIN_NAME, oldNode);
+    var newWrapped = new _Node.NamedNode(_util.MIN_NAME, newNode);
+    return this.compare(oldWrapped, newWrapped) !== 0;
+  };
+
+  Index.prototype.minPost = function () {
+    return _Node.NamedNode.MIN;
+  };
+  return Index;
+}();
+exports.Index = Index;

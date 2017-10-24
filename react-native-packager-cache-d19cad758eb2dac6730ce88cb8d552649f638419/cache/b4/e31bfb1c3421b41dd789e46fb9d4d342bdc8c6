@@ -1,0 +1,99 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.IndexedFilter = undefined;
+
+var _assert = require('../../../../utils/assert');
+
+var _Change = require('../Change');
+
+var _ChildrenNode = require('../../snap/ChildrenNode');
+
+var _PriorityIndex = require('../../snap/indexes/PriorityIndex');
+
+var IndexedFilter = function () {
+    function IndexedFilter(index_) {
+        this.index_ = index_;
+    }
+    IndexedFilter.prototype.updateChild = function (snap, key, newChild, affectedPath, source, optChangeAccumulator) {
+        (0, _assert.assert)(snap.isIndexed(this.index_), 'A node must be indexed if only a child is updated');
+        var oldChild = snap.getImmediateChild(key);
+
+        if (oldChild.getChild(affectedPath).equals(newChild.getChild(affectedPath))) {
+            if (oldChild.isEmpty() == newChild.isEmpty()) {
+                return snap;
+            }
+        }
+        if (optChangeAccumulator != null) {
+            if (newChild.isEmpty()) {
+                if (snap.hasChild(key)) {
+                    optChangeAccumulator.trackChildChange(_Change.Change.childRemovedChange(key, oldChild));
+                } else {
+                    (0, _assert.assert)(snap.isLeafNode(), 'A child remove without an old child only makes sense on a leaf node');
+                }
+            } else if (oldChild.isEmpty()) {
+                optChangeAccumulator.trackChildChange(_Change.Change.childAddedChange(key, newChild));
+            } else {
+                optChangeAccumulator.trackChildChange(_Change.Change.childChangedChange(key, newChild, oldChild));
+            }
+        }
+        if (snap.isLeafNode() && newChild.isEmpty()) {
+            return snap;
+        } else {
+            return snap.updateImmediateChild(key, newChild).withIndex(this.index_);
+        }
+    };
+
+    IndexedFilter.prototype.updateFullNode = function (oldSnap, newSnap, optChangeAccumulator) {
+        if (optChangeAccumulator != null) {
+            if (!oldSnap.isLeafNode()) {
+                oldSnap.forEachChild(_PriorityIndex.PRIORITY_INDEX, function (key, childNode) {
+                    if (!newSnap.hasChild(key)) {
+                        optChangeAccumulator.trackChildChange(_Change.Change.childRemovedChange(key, childNode));
+                    }
+                });
+            }
+            if (!newSnap.isLeafNode()) {
+                newSnap.forEachChild(_PriorityIndex.PRIORITY_INDEX, function (key, childNode) {
+                    if (oldSnap.hasChild(key)) {
+                        var oldChild = oldSnap.getImmediateChild(key);
+                        if (!oldChild.equals(childNode)) {
+                            optChangeAccumulator.trackChildChange(_Change.Change.childChangedChange(key, childNode, oldChild));
+                        }
+                    } else {
+                        optChangeAccumulator.trackChildChange(_Change.Change.childAddedChange(key, childNode));
+                    }
+                });
+            }
+        }
+        return newSnap.withIndex(this.index_);
+    };
+
+    IndexedFilter.prototype.updatePriority = function (oldSnap, newPriority) {
+        if (oldSnap.isEmpty()) {
+            return _ChildrenNode.ChildrenNode.EMPTY_NODE;
+        } else {
+            return oldSnap.updatePriority(newPriority);
+        }
+    };
+
+    IndexedFilter.prototype.filtersNodes = function () {
+        return false;
+    };
+
+    IndexedFilter.prototype.getIndexedFilter = function () {
+        return this;
+    };
+
+    IndexedFilter.prototype.getIndex = function () {
+        return this.index_;
+    };
+    return IndexedFilter;
+}();
+exports.IndexedFilter = IndexedFilter;

@@ -1,0 +1,62 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.CountedSet = undefined;
+
+var _obj = require('../../../utils/obj');
+
+var CountedSet = function () {
+    function CountedSet() {
+        this.set = {};
+    }
+
+    CountedSet.prototype.add = function (item, val) {
+        this.set[item] = val !== null ? val : true;
+    };
+
+    CountedSet.prototype.contains = function (key) {
+        return (0, _obj.contains)(this.set, key);
+    };
+
+    CountedSet.prototype.get = function (item) {
+        return this.contains(item) ? this.set[item] : undefined;
+    };
+
+    CountedSet.prototype.remove = function (item) {
+        delete this.set[item];
+    };
+
+    CountedSet.prototype.clear = function () {
+        this.set = {};
+    };
+
+    CountedSet.prototype.isEmpty = function () {
+        return (0, _obj.isEmpty)(this.set);
+    };
+
+    CountedSet.prototype.count = function () {
+        return (0, _obj.getCount)(this.set);
+    };
+
+    CountedSet.prototype.each = function (fn) {
+        (0, _obj.forEach)(this.set, function (k, v) {
+            return fn(k, v);
+        });
+    };
+
+    CountedSet.prototype.keys = function () {
+        var keys = [];
+        (0, _obj.forEach)(this.set, function (k) {
+            keys.push(k);
+        });
+        return keys;
+    };
+    return CountedSet;
+}();
+exports.CountedSet = CountedSet;

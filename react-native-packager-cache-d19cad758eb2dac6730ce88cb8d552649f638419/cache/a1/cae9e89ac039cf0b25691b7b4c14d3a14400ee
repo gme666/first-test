@@ -1,0 +1,32 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.ListenComplete = undefined;
+
+var _Path = require('../util/Path');
+
+var _Operation = require('./Operation');
+
+var ListenComplete = function () {
+    function ListenComplete(source, path) {
+        this.source = source;
+        this.path = path;
+
+        this.type = _Operation.OperationType.LISTEN_COMPLETE;
+    }
+    ListenComplete.prototype.operationForChild = function (childName) {
+        if (this.path.isEmpty()) {
+            return new ListenComplete(this.source, _Path.Path.Empty);
+        } else {
+            return new ListenComplete(this.source, this.path.popFront());
+        }
+    };
+    return ListenComplete;
+}();
+exports.ListenComplete = ListenComplete;

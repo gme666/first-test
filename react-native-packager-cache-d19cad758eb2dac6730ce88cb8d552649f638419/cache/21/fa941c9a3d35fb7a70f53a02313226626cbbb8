@@ -1,0 +1,38 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.isNodeSdk = exports.isReactNative = exports.isMobileCordova = exports.getUA = undefined;
+
+var _typeof = typeof Symbol === "function" && typeof (typeof Symbol === "function" ? Symbol.iterator : "@@iterator") === "symbol" ? function (obj) {
+    return typeof obj;
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== (typeof Symbol === "function" ? Symbol.prototype : "@@prototype") ? "symbol" : typeof obj;
+};
+
+var _constants = require('./constants');
+
+var getUA = exports.getUA = function getUA() {
+    if (typeof navigator !== 'undefined' && typeof navigator['userAgent'] === 'string') {
+        return navigator['userAgent'];
+    } else {
+        return '';
+    }
+};
+
+var isMobileCordova = exports.isMobileCordova = function isMobileCordova() {
+    return typeof window !== 'undefined' && !!(window['cordova'] || window['phonegap'] || window['PhoneGap']) && /ios|iphone|ipod|ipad|android|blackberry|iemobile/i.test(getUA());
+};
+
+var isReactNative = exports.isReactNative = function isReactNative() {
+    return (typeof navigator === 'undefined' ? 'undefined' : _typeof(navigator)) === 'object' && navigator['product'] === 'ReactNative';
+};
+
+var isNodeSdk = exports.isNodeSdk = function isNodeSdk() {
+    return _constants.CONSTANTS.NODE_CLIENT === true || _constants.CONSTANTS.NODE_ADMIN === true;
+};

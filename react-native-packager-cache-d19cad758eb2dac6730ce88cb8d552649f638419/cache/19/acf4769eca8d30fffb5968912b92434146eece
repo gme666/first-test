@@ -1,0 +1,22 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.assertionError = exports.assert = undefined;
+
+var _constants = require('./constants');
+
+var assert = exports.assert = function assert(assertion, message) {
+    if (!assertion) {
+        throw assertionError(message);
+    }
+};
+
+var assertionError = exports.assertionError = function assertionError(message) {
+    return new Error('Firebase Database (' + _constants.CONSTANTS.SDK_VERSION + ') INTERNAL ASSERT FAILED: ' + message);
+};

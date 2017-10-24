@@ -1,0 +1,50 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Merge = undefined;
+
+var _Operation = require('./Operation');
+
+var _Overwrite = require('./Overwrite');
+
+var _Path = require('../util/Path');
+
+var _assert = require('../../../utils/assert');
+
+var Merge = function () {
+    function Merge(source, path, children) {
+        this.source = source;
+        this.path = path;
+        this.children = children;
+
+        this.type = _Operation.OperationType.MERGE;
+    }
+
+    Merge.prototype.operationForChild = function (childName) {
+        if (this.path.isEmpty()) {
+            var childTree = this.children.subtree(new _Path.Path(childName));
+            if (childTree.isEmpty()) {
+                return null;
+            } else if (childTree.value) {
+                return new _Overwrite.Overwrite(this.source, _Path.Path.Empty, childTree.value);
+            } else {
+                return new Merge(this.source, _Path.Path.Empty, childTree);
+            }
+        } else {
+            (0, _assert.assert)(this.path.getFront() === childName, "Can't get a merge for a child not on the path of the operation");
+            return new Merge(this.source, this.path.popFront(), this.children);
+        }
+    };
+
+    Merge.prototype.toString = function () {
+        return 'Operation(' + this.path + ': ' + this.source.toString() + ' merge: ' + this.children.toString() + ')';
+    };
+    return Merge;
+}();
+exports.Merge = Merge;

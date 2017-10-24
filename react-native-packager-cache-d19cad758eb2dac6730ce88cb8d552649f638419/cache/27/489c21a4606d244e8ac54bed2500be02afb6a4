@@ -1,0 +1,37 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.MemoryStorage = undefined;
+
+var _obj = require('../../../utils/obj');
+
+var MemoryStorage = function () {
+    function MemoryStorage() {
+        this.cache_ = {};
+        this.isInMemoryStorage = true;
+    }
+    MemoryStorage.prototype.set = function (key, value) {
+        if (value == null) {
+            delete this.cache_[key];
+        } else {
+            this.cache_[key] = value;
+        }
+    };
+    MemoryStorage.prototype.get = function (key) {
+        if ((0, _obj.contains)(this.cache_, key)) {
+            return this.cache_[key];
+        }
+        return null;
+    };
+    MemoryStorage.prototype.remove = function (key) {
+        delete this.cache_[key];
+    };
+    return MemoryStorage;
+}();
+exports.MemoryStorage = MemoryStorage;

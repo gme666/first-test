@@ -1,0 +1,9 @@
+8feab8bc3d0067d987f1cd3cc9b5ca70
+Object.defineProperty(exports,"__esModule",{value:true});var _redux=require('redux');
+var _AuthReducer=require('./AuthReducer');var _AuthReducer2=_interopRequireDefault(_AuthReducer);
+var _CalendarReducer=require('./CalendarReducer');var _CalendarReducer2=_interopRequireDefault(_CalendarReducer);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}exports.default=
+
+(0,_redux.combineReducers)({
+auth:_AuthReducer2.default,
+calendar:_CalendarReducer2.default});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGV4LmpzIl0sIm5hbWVzIjpbImF1dGgiLCJjYWxlbmRhciJdLCJtYXBwaW5ncyI6InlEQUFBO0FBQ0EsMEM7QUFDQSxrRDs7QUFFZSwyQkFBZ0I7QUFDN0JBLDBCQUQ2QjtBQUU3QkMsa0NBRjZCLENBQWhCLEMiLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBjb21iaW5lUmVkdWNlcnMgfSBmcm9tICdyZWR1eCc7XG5pbXBvcnQgQXV0aFJlZHVjZXIgZnJvbSAnLi9BdXRoUmVkdWNlcic7XG5pbXBvcnQgQ2FsZW5kYXJSZWR1Y2VyIGZyb20gJy4vQ2FsZW5kYXJSZWR1Y2VyJztcblxuZXhwb3J0IGRlZmF1bHQgY29tYmluZVJlZHVjZXJzKHtcbiAgYXV0aDogQXV0aFJlZHVjZXIsXG4gIGNhbGVuZGFyOiBDYWxlbmRhclJlZHVjZXJcbn0pO1xuIl19

@@ -1,0 +1,21 @@
+9b79a3b20d2a83261369b47b3a15016a
+Object.defineProperty(exports,"__esModule",{value:true});var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=require('react');var _react2=_interopRequireDefault(_react);
+var _propTypes=require('prop-types');var _propTypes2=_interopRequireDefault(_propTypes);
+var _createReactNativeComponentClass=require('react-native/Libraries/Renderer/shims/createReactNativeComponentClass.js');var _createReactNativeComponentClass2=_interopRequireDefault(_createReactNativeComponentClass);
+var _attributes=require('../lib/attributes');function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var _class=function(_Component){_inherits(_class,_Component);function _class(){_classCallCheck(this,_class);return _possibleConstructorReturn(this,(_class.__proto__||Object.getPrototypeOf(_class)).apply(this,arguments));}_createClass(_class,[{key:'render',value:function render()
+
+
+
+
+
+
+
+{
+return _react2.default.createElement(RNSVGClipPath,{name:this.props.id},this.props.children);
+}}]);return _class;}(_react.Component);_class.displayName='ClipPath';_class.propTypes={id:_propTypes2.default.string.isRequired};exports.default=_class;
+
+
+var RNSVGClipPath=(0,_createReactNativeComponentClass2.default)({
+validAttributes:_attributes.ClipPathAttributes,
+uiViewClassName:'RNSVGClipPath'});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkNsaXBQYXRoLmpzIl0sIm5hbWVzIjpbInByb3BzIiwiaWQiLCJjaGlsZHJlbiIsImRpc3BsYXlOYW1lIiwicHJvcFR5cGVzIiwic3RyaW5nIiwiaXNSZXF1aXJlZCIsIlJOU1ZHQ2xpcFBhdGgiLCJ2YWxpZEF0dHJpYnV0ZXMiLCJ1aVZpZXdDbGFzc05hbWUiXSwibWFwcGluZ3MiOiJ1akJBQUEsNEI7QUFDQSxxQztBQUNBLHlIO0FBQ0EsNkM7Ozs7Ozs7O0FBUWE7QUFDTCxNQUFPLCtCQUFDLGFBQUQsRUFBZSxLQUFNLEtBQUtBLEtBQUwsQ0FBV0MsRUFBaEMsRUFBcUMsS0FBS0QsS0FBTCxDQUFXRSxRQUFoRCxDQUFQO0FBQ0gsQyw2Q0FQTUMsVyxDQUFjLFUsUUFDZEMsUyxDQUFZLENBQ2ZILEdBQUksb0JBQVVJLE1BQVYsQ0FBaUJDLFVBRE4sQzs7O0FBU3ZCLEdBQU1DLGVBQWdCLDhDQUFnQztBQUNsREMsOENBRGtEO0FBRWxEQyxnQkFBaUIsZUFGaUMsQ0FBaEMsQ0FBdEIiLCJmaWxlIjoiQ2xpcFBhdGguanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgUmVhY3QsIHtDb21wb25lbnR9IGZyb20gJ3JlYWN0JztcbmltcG9ydCBQcm9wVHlwZXMgZnJvbSAncHJvcC10eXBlcyc7XG5pbXBvcnQgY3JlYXRlUmVhY3ROYXRpdmVDb21wb25lbnRDbGFzcyBmcm9tICdyZWFjdC1uYXRpdmUvTGlicmFyaWVzL1JlbmRlcmVyL3NoaW1zL2NyZWF0ZVJlYWN0TmF0aXZlQ29tcG9uZW50Q2xhc3MuanMnO1xuaW1wb3J0IHtDbGlwUGF0aEF0dHJpYnV0ZXN9IGZyb20gJy4uL2xpYi9hdHRyaWJ1dGVzJztcblxuZXhwb3J0IGRlZmF1bHQgY2xhc3MgZXh0ZW5kcyBDb21wb25lbnR7XG4gICAgc3RhdGljIGRpc3BsYXlOYW1lID0gJ0NsaXBQYXRoJztcbiAgICBzdGF0aWMgcHJvcFR5cGVzID0ge1xuICAgICAgICBpZDogUHJvcFR5cGVzLnN0cmluZy5pc1JlcXVpcmVkXG4gICAgfTtcblxuICAgIHJlbmRlcigpIHtcbiAgICAgICAgcmV0dXJuIDxSTlNWR0NsaXBQYXRoIG5hbWU9e3RoaXMucHJvcHMuaWR9Pnt0aGlzLnByb3BzLmNoaWxkcmVufTwvUk5TVkdDbGlwUGF0aD47XG4gICAgfVxufVxuXG5jb25zdCBSTlNWR0NsaXBQYXRoID0gY3JlYXRlUmVhY3ROYXRpdmVDb21wb25lbnRDbGFzcyh7XG4gICAgdmFsaWRBdHRyaWJ1dGVzOiBDbGlwUGF0aEF0dHJpYnV0ZXMsXG4gICAgdWlWaWV3Q2xhc3NOYW1lOiAnUk5TVkdDbGlwUGF0aCdcbn0pO1xuIl19

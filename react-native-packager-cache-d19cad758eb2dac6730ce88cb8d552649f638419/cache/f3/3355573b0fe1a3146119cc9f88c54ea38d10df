@@ -1,0 +1,41 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.OperationSource = exports.OperationType = undefined;
+
+var _assert = require("../../../utils/assert");
+
+var OperationType = exports.OperationType = undefined;
+
+(function (OperationType) {
+  OperationType[OperationType["OVERWRITE"] = 0] = "OVERWRITE";
+  OperationType[OperationType["MERGE"] = 1] = "MERGE";
+  OperationType[OperationType["ACK_USER_WRITE"] = 2] = "ACK_USER_WRITE";
+  OperationType[OperationType["LISTEN_COMPLETE"] = 3] = "LISTEN_COMPLETE";
+})(OperationType || (exports.OperationType = OperationType = {}));
+
+var OperationSource = function () {
+  function OperationSource(fromUser, fromServer, queryId, tagged) {
+    this.fromUser = fromUser;
+    this.fromServer = fromServer;
+    this.queryId = queryId;
+    this.tagged = tagged;
+    (0, _assert.assert)(!tagged || fromServer, 'Tagged queries must be from server.');
+  }
+
+  OperationSource.User = new OperationSource(true, false, null, false);
+
+  OperationSource.Server = new OperationSource(false, true, null, false);
+
+  OperationSource.forServerTaggedQuery = function (queryId) {
+    return new OperationSource(false, true, queryId, true);
+  };
+  return OperationSource;
+}();
+exports.OperationSource = OperationSource;

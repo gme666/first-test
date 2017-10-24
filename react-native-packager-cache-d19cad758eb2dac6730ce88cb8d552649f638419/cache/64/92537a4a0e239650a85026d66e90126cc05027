@@ -1,0 +1,17 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var CONSTANTS = exports.CONSTANTS = {
+  NODE_CLIENT: false,
+
+  NODE_ADMIN: false,
+
+  SDK_VERSION: '4.3.1'
+};

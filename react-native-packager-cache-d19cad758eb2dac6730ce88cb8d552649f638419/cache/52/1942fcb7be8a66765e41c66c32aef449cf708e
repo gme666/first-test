@@ -1,0 +1,98 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.RangedFilter = undefined;
+
+var _IndexedFilter = require('./IndexedFilter');
+
+var _PriorityIndex = require('../../snap/indexes/PriorityIndex');
+
+var _Node = require('../../../core/snap/Node');
+
+var _ChildrenNode = require('../../snap/ChildrenNode');
+
+var RangedFilter = function () {
+    function RangedFilter(params) {
+        this.indexedFilter_ = new _IndexedFilter.IndexedFilter(params.getIndex());
+        this.index_ = params.getIndex();
+        this.startPost_ = RangedFilter.getStartPost_(params);
+        this.endPost_ = RangedFilter.getEndPost_(params);
+    }
+
+    RangedFilter.prototype.getStartPost = function () {
+        return this.startPost_;
+    };
+
+    RangedFilter.prototype.getEndPost = function () {
+        return this.endPost_;
+    };
+
+    RangedFilter.prototype.matches = function (node) {
+        return this.index_.compare(this.getStartPost(), node) <= 0 && this.index_.compare(node, this.getEndPost()) <= 0;
+    };
+
+    RangedFilter.prototype.updateChild = function (snap, key, newChild, affectedPath, source, optChangeAccumulator) {
+        if (!this.matches(new _Node.NamedNode(key, newChild))) {
+            newChild = _ChildrenNode.ChildrenNode.EMPTY_NODE;
+        }
+        return this.indexedFilter_.updateChild(snap, key, newChild, affectedPath, source, optChangeAccumulator);
+    };
+
+    RangedFilter.prototype.updateFullNode = function (oldSnap, newSnap, optChangeAccumulator) {
+        if (newSnap.isLeafNode()) {
+            newSnap = _ChildrenNode.ChildrenNode.EMPTY_NODE;
+        }
+        var filtered = newSnap.withIndex(this.index_);
+
+        filtered = filtered.updatePriority(_ChildrenNode.ChildrenNode.EMPTY_NODE);
+        var self = this;
+        newSnap.forEachChild(_PriorityIndex.PRIORITY_INDEX, function (key, childNode) {
+            if (!self.matches(new _Node.NamedNode(key, childNode))) {
+                filtered = filtered.updateImmediateChild(key, _ChildrenNode.ChildrenNode.EMPTY_NODE);
+            }
+        });
+        return this.indexedFilter_.updateFullNode(oldSnap, filtered, optChangeAccumulator);
+    };
+
+    RangedFilter.prototype.updatePriority = function (oldSnap, newPriority) {
+        return oldSnap;
+    };
+
+    RangedFilter.prototype.filtersNodes = function () {
+        return true;
+    };
+
+    RangedFilter.prototype.getIndexedFilter = function () {
+        return this.indexedFilter_;
+    };
+
+    RangedFilter.prototype.getIndex = function () {
+        return this.index_;
+    };
+
+    RangedFilter.getStartPost_ = function (params) {
+        if (params.hasStart()) {
+            var startName = params.getIndexStartName();
+            return params.getIndex().makePost(params.getIndexStartValue(), startName);
+        } else {
+            return params.getIndex().minPost();
+        }
+    };
+
+    RangedFilter.getEndPost_ = function (params) {
+        if (params.hasEnd()) {
+            var endName = params.getIndexEndName();
+            return params.getIndex().makePost(params.getIndexEndValue(), endName);
+        } else {
+            return params.getIndex().maxPost();
+        }
+    };
+    return RangedFilter;
+}();
+exports.RangedFilter = RangedFilter;

@@ -1,0 +1,52 @@
+dfff818b3707a3cfcfca19ebcfb66ea9
+Object.defineProperty(exports,"__esModule",{value:true});var _extends=Object.assign||function(target){for(var i=1;i<arguments.length;i++){var source=arguments[i];for(var key in source){if(Object.prototype.hasOwnProperty.call(source,key)){target[key]=source[key];}}}return target;};var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=require('react');var _react2=_interopRequireDefault(_react);
+var _propTypes=require('prop-types');var _propTypes2=_interopRequireDefault(_propTypes);
+var _createReactNativeComponentClass=require('react-native/Libraries/Renderer/shims/createReactNativeComponentClass.js');var _createReactNativeComponentClass2=_interopRequireDefault(_createReactNativeComponentClass);
+var _extractProps=require('../lib/extract/extractProps');var _extractProps2=_interopRequireDefault(_extractProps);
+var _props=require('../lib/props');
+var _attributes=require('../lib/attributes');
+var _Shape2=require('./Shape');var _Shape3=_interopRequireDefault(_Shape2);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}
+
+var idExpReg=/^#(.+)$/;var _class=function(_Shape){_inherits(_class,_Shape);function _class(){var _ref;var _temp,_this,_ret;_classCallCheck(this,_class);for(var _len=arguments.length,args=Array(_len),_key=0;_key<_len;_key++){args[_key]=arguments[_key];}return _ret=(_temp=(_this=_possibleConstructorReturn(this,(_ref=_class.__proto__||Object.getPrototypeOf(_class)).call.apply(_ref,[this].concat(args))),_this),_initialiseProps.call(_this),_temp),_possibleConstructorReturn(_this,_ret);}_createClass(_class,[{key:'render',value:function render()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{var _this2=this;var
+props=this.props;
+
+var matched=props.href.match(idExpReg);
+var href=void 0;
+
+if(matched){
+href=matched[1];
+}
+
+if(!href){
+console.warn('Invalid `href` prop for `Use` element, expected a href like `"#id"`, but got: "'+props.href+'"');
+}
+
+return _react2.default.createElement(RNSVGUse,_extends({
+ref:function ref(ele){_this2.root=ele;}},
+(0,_extractProps2.default)(props,this),{
+href:href,
+width:props.width,
+height:props.height}),
+props.children);
+}}]);return _class;}(_Shape3.default);_class.displayName='Use';_class.propTypes=_extends({href:_propTypes2.default.string.isRequired,width:_props.numberProp,height:_props.numberProp},_props.pathProps);var _initialiseProps=function _initialiseProps(){var _this3=this;this.setNativeProps=function(){var _root;(_root=_this3.root).setNativeProps.apply(_root,arguments);};};exports.default=_class;
+
+
+var RNSVGUse=(0,_createReactNativeComponentClass2.default)({
+validAttributes:_attributes.UseAttributes,
+uiViewClassName:'RNSVGUse'});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIlVzZS5qcyJdLCJuYW1lcyI6WyJpZEV4cFJlZyIsInByb3BzIiwibWF0Y2hlZCIsImhyZWYiLCJtYXRjaCIsImNvbnNvbGUiLCJ3YXJuIiwicm9vdCIsImVsZSIsIndpZHRoIiwiaGVpZ2h0IiwiY2hpbGRyZW4iLCJkaXNwbGF5TmFtZSIsInByb3BUeXBlcyIsInN0cmluZyIsImlzUmVxdWlyZWQiLCJzZXROYXRpdmVQcm9wcyIsIlJOU1ZHVXNlIiwidmFsaWRBdHRyaWJ1dGVzIiwidWlWaWV3Q2xhc3NOYW1lIl0sIm1hcHBpbmdzIjoidXhCQUFBLDRCO0FBQ0EscUM7QUFDQSx5SDtBQUNBLHlEO0FBQ0E7QUFDQTtBQUNBLCtCOztBQUVBLEdBQU1BLFVBQVcsU0FBakIsQzs7Ozs7Ozs7Ozs7Ozs7O0FBZWE7QUFDRUMsS0FERixDQUNXLElBRFgsQ0FDRUEsS0FERjs7QUFHTCxHQUFNQyxTQUFVRCxNQUFNRSxJQUFOLENBQVdDLEtBQVgsQ0FBaUJKLFFBQWpCLENBQWhCO0FBQ0EsR0FBSUcsWUFBSjs7QUFFQSxHQUFJRCxPQUFKLENBQWE7QUFDVEMsS0FBT0QsUUFBUSxDQUFSLENBQVA7QUFDSDs7QUFFRCxHQUFJLENBQUNDLElBQUwsQ0FBVztBQUNQRSxRQUFRQyxJQUFSLENBQWEsa0ZBQW9GTCxNQUFNRSxJQUExRixDQUFpRyxHQUE5RztBQUNIOztBQUVELE1BQU8sK0JBQUMsUUFBRDtBQUNILElBQUssaUJBQU8sQ0FBQyxPQUFLSSxJQUFMLENBQVlDLEdBQVosQ0FBaUIsQ0FEM0I7QUFFQywyQkFBYVAsS0FBYixDQUFvQixJQUFwQixDQUZEO0FBR0gsS0FBTUUsSUFISDtBQUlILE1BQU9GLE1BQU1RLEtBSlY7QUFLSCxPQUFRUixNQUFNUyxNQUxYO0FBTUxULE1BQU1VLFFBTkQsQ0FBUDtBQU9ILEMsNENBbENNQyxXLENBQWMsSyxRQUVkQyxTLFdBQ0hWLEtBQU0sb0JBQVVXLE1BQVYsQ0FBaUJDLFUsQ0FDdkJOLHVCLENBQ0FDLHdCLDBGQUlKTSxjLENBQWlCLFVBQWEsV0FDMUIsY0FBS1QsSUFBTCxFQUFVUyxjQUFWLHdCQUNILEM7OztBQTBCTCxHQUFNQyxVQUFXLDhDQUFnQztBQUM3Q0MseUNBRDZDO0FBRTdDQyxnQkFBaUIsVUFGNEIsQ0FBaEMsQ0FBakIiLCJmaWxlIjoiVXNlLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IFJlYWN0IGZyb20gJ3JlYWN0JztcbmltcG9ydCBQcm9wVHlwZXMgZnJvbSAncHJvcC10eXBlcyc7XG5pbXBvcnQgY3JlYXRlUmVhY3ROYXRpdmVDb21wb25lbnRDbGFzcyBmcm9tICdyZWFjdC1uYXRpdmUvTGlicmFyaWVzL1JlbmRlcmVyL3NoaW1zL2NyZWF0ZVJlYWN0TmF0aXZlQ29tcG9uZW50Q2xhc3MuanMnO1xuaW1wb3J0IGV4dHJhY3RQcm9wcyBmcm9tICcuLi9saWIvZXh0cmFjdC9leHRyYWN0UHJvcHMnO1xuaW1wb3J0IHtwYXRoUHJvcHMsIG51bWJlclByb3B9IGZyb20gJy4uL2xpYi9wcm9wcyc7XG5pbXBvcnQge1VzZUF0dHJpYnV0ZXN9IGZyb20gJy4uL2xpYi9hdHRyaWJ1dGVzJztcbmltcG9ydCBTaGFwZSBmcm9tICcuL1NoYXBlJztcblxuY29uc3QgaWRFeHBSZWcgPSAvXiMoLispJC87XG5leHBvcnQgZGVmYXVsdCBjbGFzcyBleHRlbmRzIFNoYXBlIHtcbiAgICBzdGF0aWMgZGlzcGxheU5hbWUgPSAnVXNlJztcblxuICAgIHN0YXRpYyBwcm9wVHlwZXMgPSB7XG4gICAgICAgIGhyZWY6IFByb3BUeXBlcy5zdHJpbmcuaXNSZXF1aXJlZCxcbiAgICAgICAgd2lkdGg6IG51bWJlclByb3AsIC8vIEp1c3QgZm9yIHJldXNpbmcgYFN5bWJvbGBcbiAgICAgICAgaGVpZ2h0OiBudW1iZXJQcm9wLCAvLyAgSnVzdCBmb3IgcmV1c2luZyBgU3ltYm9sYFxuICAgICAgICAuLi5wYXRoUHJvcHNcbiAgICB9O1xuXG4gICAgc2V0TmF0aXZlUHJvcHMgPSAoLi4uYXJncykgPT4ge1xuICAgICAgICB0aGlzLnJvb3Quc2V0TmF0aXZlUHJvcHMoLi4uYXJncyk7XG4gICAgfTtcblxuICAgIHJlbmRlcigpIHtcbiAgICAgICAgY29uc3Qge3Byb3BzfSA9IHRoaXM7XG4gICAgICAgIC8vIG1hdGNoIFwidXJsKCNwYXR0ZXJuKVwiXG4gICAgICAgIGNvbnN0IG1hdGNoZWQgPSBwcm9wcy5ocmVmLm1hdGNoKGlkRXhwUmVnKTtcbiAgICAgICAgbGV0IGhyZWY7XG5cbiAgICAgICAgaWYgKG1hdGNoZWQpIHtcbiAgICAgICAgICAgIGhyZWYgPSBtYXRjaGVkWzFdO1xuICAgICAgICB9XG5cbiAgICAgICAgaWYgKCFocmVmKSB7XG4gICAgICAgICAgICBjb25zb2xlLndhcm4oJ0ludmFsaWQgYGhyZWZgIHByb3AgZm9yIGBVc2VgIGVsZW1lbnQsIGV4cGVjdGVkIGEgaHJlZiBsaWtlIGBcIiNpZFwiYCwgYnV0IGdvdDogXCInICsgcHJvcHMuaHJlZiArICdcIicpO1xuICAgICAgICB9XG5cbiAgICAgICAgcmV0dXJuIDxSTlNWR1VzZVxuICAgICAgICAgICAgcmVmPXtlbGUgPT4ge3RoaXMucm9vdCA9IGVsZTt9fVxuICAgICAgICAgICAgey4uLmV4dHJhY3RQcm9wcyhwcm9wcywgdGhpcyl9XG4gICAgICAgICAgICBocmVmPXtocmVmfVxuICAgICAgICAgICAgd2lkdGg9e3Byb3BzLndpZHRofVxuICAgICAgICAgICAgaGVpZ2h0PXtwcm9wcy5oZWlnaHR9XG4gICAgICAgID57cHJvcHMuY2hpbGRyZW59PC9STlNWR1VzZT47XG4gICAgfVxufVxuXG5jb25zdCBSTlNWR1VzZSA9IGNyZWF0ZVJlYWN0TmF0aXZlQ29tcG9uZW50Q2xhc3Moe1xuICAgIHZhbGlkQXR0cmlidXRlczogVXNlQXR0cmlidXRlcyxcbiAgICB1aVZpZXdDbGFzc05hbWU6ICdSTlNWR1VzZSdcbn0pO1xuXG4iXX0=

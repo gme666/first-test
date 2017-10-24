@@ -1,0 +1,33 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Overwrite = undefined;
+
+var _Operation = require('./Operation');
+
+var _Path = require('../util/Path');
+
+var Overwrite = function () {
+    function Overwrite(source, path, snap) {
+        this.source = source;
+        this.path = path;
+        this.snap = snap;
+
+        this.type = _Operation.OperationType.OVERWRITE;
+    }
+    Overwrite.prototype.operationForChild = function (childName) {
+        if (this.path.isEmpty()) {
+            return new Overwrite(this.source, _Path.Path.Empty, this.snap.getImmediateChild(childName));
+        } else {
+            return new Overwrite(this.source, this.path.popFront(), this.snap);
+        }
+    };
+    return Overwrite;
+}();
+exports.Overwrite = Overwrite;

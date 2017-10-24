@@ -1,0 +1,54 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.StatsReporter = undefined;
+
+var _obj = require('../../../utils/obj');
+
+var _util = require('../util/util');
+
+var _StatsListener = require('./StatsListener');
+
+var FIRST_STATS_MIN_TIME = 10 * 1000;
+
+var FIRST_STATS_MAX_TIME = 30 * 1000;
+
+var REPORT_STATS_INTERVAL = 5 * 60 * 1000;
+
+var StatsReporter = function () {
+    function StatsReporter(collection, server_) {
+        this.server_ = server_;
+        this.statsToReport_ = {};
+        this.statsListener_ = new _StatsListener.StatsListener(collection);
+        var timeout = FIRST_STATS_MIN_TIME + (FIRST_STATS_MAX_TIME - FIRST_STATS_MIN_TIME) * Math.random();
+        (0, _util.setTimeoutNonBlocking)(this.reportStats_.bind(this), Math.floor(timeout));
+    }
+    StatsReporter.prototype.includeStat = function (stat) {
+        this.statsToReport_[stat] = true;
+    };
+    StatsReporter.prototype.reportStats_ = function () {
+        var _this = this;
+        var stats = this.statsListener_.get();
+        var reportedStats = {};
+        var haveStatsToReport = false;
+        (0, _obj.forEach)(stats, function (stat, value) {
+            if (value > 0 && (0, _obj.contains)(_this.statsToReport_, stat)) {
+                reportedStats[stat] = value;
+                haveStatsToReport = true;
+            }
+        });
+        if (haveStatsToReport) {
+            this.server_.reportStats(reportedStats);
+        }
+
+        (0, _util.setTimeoutNonBlocking)(this.reportStats_.bind(this), Math.floor(Math.random() * 2 * REPORT_STATS_INTERVAL));
+    };
+    return StatsReporter;
+}();
+exports.StatsReporter = StatsReporter;

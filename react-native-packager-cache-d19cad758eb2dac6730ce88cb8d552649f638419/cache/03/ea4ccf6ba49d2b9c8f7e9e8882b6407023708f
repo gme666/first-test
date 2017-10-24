@@ -1,0 +1,32 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.StatsCollection = undefined;
+
+var _deep_copy = require('../../../utils/deep_copy');
+
+var _obj = require('../../../utils/obj');
+
+var StatsCollection = function () {
+    function StatsCollection() {
+        this.counters_ = {};
+    }
+    StatsCollection.prototype.incrementCounter = function (name, amount) {
+        if (amount === void 0) {
+            amount = 1;
+        }
+        if (!(0, _obj.contains)(this.counters_, name)) this.counters_[name] = 0;
+        this.counters_[name] += amount;
+    };
+    StatsCollection.prototype.get = function () {
+        return (0, _deep_copy.deepCopy)(this.counters_);
+    };
+    return StatsCollection;
+}();
+exports.StatsCollection = StatsCollection;

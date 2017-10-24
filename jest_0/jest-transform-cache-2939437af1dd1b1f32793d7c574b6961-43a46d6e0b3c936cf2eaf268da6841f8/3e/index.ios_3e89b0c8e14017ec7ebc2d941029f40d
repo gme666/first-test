@@ -1,0 +1,6 @@
+bfbcab4a5493ca55671d3090f9f3bd52
+Object.defineProperty(exports,"__esModule",{value:true});var _reactNative=require('react-native');
+var _App=require('./src/App');var _App2=_interopRequireDefault(_App);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}exports.default=
+
+_reactNative.AppRegistry.registerComponent('manager',function(){return _App2.default;});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGV4Lmlvcy5qcyJdLCJuYW1lcyI6WyJyZWdpc3RlckNvbXBvbmVudCJdLCJtYXBwaW5ncyI6InlEQUFBO0FBQ0EsOEI7O0FBRWUseUJBQVlBLGlCQUFaLENBQThCLFNBQTlCLENBQXlDLGlDQUF6QyxDIiwiZmlsZSI6ImluZGV4Lmlvcy5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IEFwcFJlZ2lzdHJ5IH0gZnJvbSAncmVhY3QtbmF0aXZlJztcbmltcG9ydCBBcHAgZnJvbSAnLi9zcmMvQXBwJztcblxuZXhwb3J0IGRlZmF1bHQgQXBwUmVnaXN0cnkucmVnaXN0ZXJDb21wb25lbnQoJ21hbmFnZXInLCAoKSA9PiBBcHApO1xuIl19

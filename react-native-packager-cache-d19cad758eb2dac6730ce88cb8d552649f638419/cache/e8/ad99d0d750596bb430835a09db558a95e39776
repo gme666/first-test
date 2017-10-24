@@ -1,0 +1,112 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.DataSnapshot = undefined;
+
+var _validation = require('../../utils/validation');
+
+var _validation2 = require('../core/util/validation');
+
+var _Path = require('../core/util/Path');
+
+var _PriorityIndex = require('../core/snap/indexes/PriorityIndex');
+
+var DataSnapshot = function () {
+    function DataSnapshot(node_, ref_, index_) {
+        this.node_ = node_;
+        this.ref_ = ref_;
+        this.index_ = index_;
+    }
+
+    DataSnapshot.prototype.val = function () {
+        (0, _validation.validateArgCount)('DataSnapshot.val', 0, 0, arguments.length);
+        return this.node_.val();
+    };
+
+    DataSnapshot.prototype.exportVal = function () {
+        (0, _validation.validateArgCount)('DataSnapshot.exportVal', 0, 0, arguments.length);
+        return this.node_.val(true);
+    };
+
+    DataSnapshot.prototype.toJSON = function () {
+        (0, _validation.validateArgCount)('DataSnapshot.toJSON', 0, 1, arguments.length);
+        return this.exportVal();
+    };
+
+    DataSnapshot.prototype.exists = function () {
+        (0, _validation.validateArgCount)('DataSnapshot.exists', 0, 0, arguments.length);
+        return !this.node_.isEmpty();
+    };
+
+    DataSnapshot.prototype.child = function (childPathString) {
+        (0, _validation.validateArgCount)('DataSnapshot.child', 0, 1, arguments.length);
+
+        childPathString = String(childPathString);
+        (0, _validation2.validatePathString)('DataSnapshot.child', 1, childPathString, false);
+        var childPath = new _Path.Path(childPathString);
+        var childRef = this.ref_.child(childPath);
+        return new DataSnapshot(this.node_.getChild(childPath), childRef, _PriorityIndex.PRIORITY_INDEX);
+    };
+
+    DataSnapshot.prototype.hasChild = function (childPathString) {
+        (0, _validation.validateArgCount)('DataSnapshot.hasChild', 1, 1, arguments.length);
+        (0, _validation2.validatePathString)('DataSnapshot.hasChild', 1, childPathString, false);
+        var childPath = new _Path.Path(childPathString);
+        return !this.node_.getChild(childPath).isEmpty();
+    };
+
+    DataSnapshot.prototype.getPriority = function () {
+        (0, _validation.validateArgCount)('DataSnapshot.getPriority', 0, 0, arguments.length);
+
+        return this.node_.getPriority().val();
+    };
+
+    DataSnapshot.prototype.forEach = function (action) {
+        var _this = this;
+        (0, _validation.validateArgCount)('DataSnapshot.forEach', 1, 1, arguments.length);
+        (0, _validation.validateCallback)('DataSnapshot.forEach', 1, action, false);
+        if (this.node_.isLeafNode()) return false;
+        var childrenNode = this.node_;
+
+        return !!childrenNode.forEachChild(this.index_, function (key, node) {
+            return action(new DataSnapshot(node, _this.ref_.child(key), _PriorityIndex.PRIORITY_INDEX));
+        });
+    };
+
+    DataSnapshot.prototype.hasChildren = function () {
+        (0, _validation.validateArgCount)('DataSnapshot.hasChildren', 0, 0, arguments.length);
+        if (this.node_.isLeafNode()) return false;else return !this.node_.isEmpty();
+    };
+    Object.defineProperty(DataSnapshot.prototype, "key", {
+        get: function get() {
+            return this.ref_.getKey();
+        },
+        enumerable: true,
+        configurable: true
+    });
+
+    DataSnapshot.prototype.numChildren = function () {
+        (0, _validation.validateArgCount)('DataSnapshot.numChildren', 0, 0, arguments.length);
+        return this.node_.numChildren();
+    };
+
+    DataSnapshot.prototype.getRef = function () {
+        (0, _validation.validateArgCount)('DataSnapshot.ref', 0, 0, arguments.length);
+        return this.ref_;
+    };
+    Object.defineProperty(DataSnapshot.prototype, "ref", {
+        get: function get() {
+            return this.getRef();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return DataSnapshot;
+}();
+exports.DataSnapshot = DataSnapshot;

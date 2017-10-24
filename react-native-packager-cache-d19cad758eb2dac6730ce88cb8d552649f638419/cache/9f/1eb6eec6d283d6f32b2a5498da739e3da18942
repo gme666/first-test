@@ -1,0 +1,19 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var PROTOCOL_VERSION = exports.PROTOCOL_VERSION = '5';
+var VERSION_PARAM = exports.VERSION_PARAM = 'v';
+var TRANSPORT_SESSION_PARAM = exports.TRANSPORT_SESSION_PARAM = 's';
+var REFERER_PARAM = exports.REFERER_PARAM = 'r';
+var FORGE_REF = exports.FORGE_REF = 'f';
+var FORGE_DOMAIN = exports.FORGE_DOMAIN = 'firebaseio.com';
+var LAST_SESSION_PARAM = exports.LAST_SESSION_PARAM = 'ls';
+var WEBSOCKET = exports.WEBSOCKET = 'websocket';
+var LONG_POLLING = exports.LONG_POLLING = 'long_polling';

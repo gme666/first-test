@@ -1,0 +1,447 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.setTimeoutNonBlocking = exports.exportPropGetter = exports.beingCrawled = exports.callUserCallback = exports.exceptionGuard = exports.tryParseInt = exports.INTEGER_REGEXP_ = exports.errorForServerCode = exports.isWindowsStoreApp = exports.isChromeExtensionContentScript = exports.doubleToIEEE754String = exports.bindCallback = exports.each = exports.splitStringBySize = exports.ObjectToUniqueKey = exports.requireKey = exports.stringCompare = exports.nameCompare = exports.MAX_NAME = exports.MIN_NAME = exports.executeWhenDOMReady = exports.isInvalidJSONNumber = exports.warnAboutUnsupportedMethod = exports.warnIfPageIsSecure = exports.warn = exports.fatal = exports.error = exports.logWrapper = exports.log = exports.enableLogging = exports.logger = exports.sha1 = exports.base64Decode = exports.base64Encode = exports.LUIDGenerator = undefined;
+
+var _typeof = typeof Symbol === "function" && typeof (typeof Symbol === "function" ? Symbol.iterator : "@@iterator") === "symbol" ? function (obj) {
+    return typeof obj;
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== (typeof Symbol === "function" ? Symbol.prototype : "@@prototype") ? "symbol" : typeof obj;
+};
+
+exports.setBufferImpl = setBufferImpl;
+
+var _assert = require('../../../utils/assert');
+
+var _obj = require('../../../utils/obj');
+
+var _crypt = require('../../../utils/crypt');
+
+var _Sha = require('../../../utils/Sha1');
+
+var _utf = require('../../../utils/utf8');
+
+var _json = require('../../../utils/json');
+
+var _storage = require('../storage/storage');
+
+var _environment = require('../../../utils/environment');
+
+var LUIDGenerator = exports.LUIDGenerator = function () {
+    var id = 1;
+    return function () {
+        return id++;
+    };
+}();
+
+var base64Encode = exports.base64Encode = function base64Encode(str) {
+    var utf8Bytes = (0, _utf.stringToByteArray)(str);
+    return _crypt.base64.encodeByteArray(utf8Bytes, true);
+};
+var BufferImpl;
+function setBufferImpl(impl) {
+    BufferImpl = impl;
+}
+
+var base64Decode = exports.base64Decode = function base64Decode(str) {
+    try {
+        if (BufferImpl) {
+            return new BufferImpl(str, 'base64').toString('utf8');
+        } else {
+            return _crypt.base64.decodeString(str, true);
+        }
+    } catch (e) {
+        log('base64Decode failed: ', e);
+    }
+    return null;
+};
+
+var sha1 = exports.sha1 = function sha1(str) {
+    var utf8Bytes = (0, _utf.stringToByteArray)(str);
+    var sha1 = new _Sha.Sha1();
+    sha1.update(utf8Bytes);
+    var sha1Bytes = sha1.digest();
+    return _crypt.base64.encodeByteArray(sha1Bytes);
+};
+
+var buildLogMessage_ = function buildLogMessage_() {
+    var var_args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        var_args[_i] = arguments[_i];
+    }
+    var message = '';
+    for (var i = 0; i < var_args.length; i++) {
+        if (Array.isArray(var_args[i]) || var_args[i] && _typeof(var_args[i]) === 'object' && typeof var_args[i].length === 'number') {
+            message += buildLogMessage_.apply(null, var_args[i]);
+        } else if (_typeof(var_args[i]) === 'object') {
+            message += (0, _json.stringify)(var_args[i]);
+        } else {
+            message += var_args[i];
+        }
+        message += ' ';
+    }
+    return message;
+};
+
+var logger = exports.logger = null;
+
+var firstLog_ = true;
+
+var enableLogging = exports.enableLogging = function enableLogging(logger_, persistent) {
+    (0, _assert.assert)(!persistent || logger_ === true || logger_ === false, "Can't turn on custom loggers persistently.");
+    if (logger_ === true) {
+        if (typeof console !== 'undefined') {
+            if (typeof console.log === 'function') {
+                exports.logger = logger = console.log.bind(console);
+            } else if (_typeof(console.log) === 'object') {
+                exports.logger = logger = function logger(message) {
+                    console.log(message);
+                };
+            }
+        }
+        if (persistent) _storage.SessionStorage.set('logging_enabled', true);
+    } else if (typeof logger_ === 'function') {
+        exports.logger = logger = logger_;
+    } else {
+        exports.logger = logger = null;
+        _storage.SessionStorage.remove('logging_enabled');
+    }
+};
+
+var log = exports.log = function log() {
+    var var_args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        var_args[_i] = arguments[_i];
+    }
+    if (firstLog_ === true) {
+        firstLog_ = false;
+        if (logger === null && _storage.SessionStorage.get('logging_enabled') === true) enableLogging(true);
+    }
+    if (logger) {
+        var message = buildLogMessage_.apply(null, var_args);
+        logger(message);
+    }
+};
+
+var logWrapper = exports.logWrapper = function logWrapper(prefix) {
+    return function () {
+        var var_args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            var_args[_i] = arguments[_i];
+        }
+        log.apply(void 0, [prefix].concat(var_args));
+    };
+};
+
+var error = exports.error = function error() {
+    var var_args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        var_args[_i] = arguments[_i];
+    }
+    if (typeof console !== 'undefined') {
+        var message = 'FIREBASE INTERNAL ERROR: ' + buildLogMessage_.apply(void 0, var_args);
+        if (typeof console.error !== 'undefined') {
+            console.error(message);
+        } else {
+            console.log(message);
+        }
+    }
+};
+
+var fatal = exports.fatal = function fatal() {
+    var var_args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        var_args[_i] = arguments[_i];
+    }
+    var message = buildLogMessage_.apply(void 0, var_args);
+    throw new Error('FIREBASE FATAL ERROR: ' + message);
+};
+
+var warn = exports.warn = function warn() {
+    var var_args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        var_args[_i] = arguments[_i];
+    }
+    if (typeof console !== 'undefined') {
+        var message = 'FIREBASE WARNING: ' + buildLogMessage_.apply(void 0, var_args);
+        if (typeof console.warn !== 'undefined') {
+            console.warn(message);
+        } else {
+            console.log(message);
+        }
+    }
+};
+
+var warnIfPageIsSecure = exports.warnIfPageIsSecure = function warnIfPageIsSecure() {
+    if (typeof window !== 'undefined' && window.location && window.location.protocol && window.location.protocol.indexOf('https:') !== -1) {
+        warn('Insecure Firebase access from a secure page. ' + 'Please use https in calls to new Firebase().');
+    }
+};
+
+var warnAboutUnsupportedMethod = exports.warnAboutUnsupportedMethod = function warnAboutUnsupportedMethod(methodName) {
+    warn(methodName + ' is unsupported and will likely change soon.  ' + 'Please do not use.');
+};
+
+var isInvalidJSONNumber = exports.isInvalidJSONNumber = function isInvalidJSONNumber(data) {
+    return typeof data === 'number' && (data != data || data == Number.POSITIVE_INFINITY || data == Number.NEGATIVE_INFINITY);
+};
+
+var executeWhenDOMReady = exports.executeWhenDOMReady = function executeWhenDOMReady(fn) {
+    if ((0, _environment.isNodeSdk)() || document.readyState === 'complete') {
+        fn();
+    } else {
+        var called_1 = false;
+        var wrappedFn_1 = function wrappedFn_1() {
+            if (!document.body) {
+                setTimeout(wrappedFn_1, Math.floor(10));
+                return;
+            }
+            if (!called_1) {
+                called_1 = true;
+                fn();
+            }
+        };
+        if (document.addEventListener) {
+            document.addEventListener('DOMContentLoaded', wrappedFn_1, false);
+
+            window.addEventListener('load', wrappedFn_1, false);
+        } else if (document.attachEvent) {
+            document.attachEvent('onreadystatechange', function () {
+                if (document.readyState === 'complete') wrappedFn_1();
+            });
+
+            window.attachEvent('onload', wrappedFn_1);
+        }
+    }
+};
+
+var MIN_NAME = exports.MIN_NAME = '[MIN_NAME]';
+
+var MAX_NAME = exports.MAX_NAME = '[MAX_NAME]';
+
+var nameCompare = exports.nameCompare = function nameCompare(a, b) {
+    if (a === b) {
+        return 0;
+    } else if (a === MIN_NAME || b === MAX_NAME) {
+        return -1;
+    } else if (b === MIN_NAME || a === MAX_NAME) {
+        return 1;
+    } else {
+        var aAsInt = tryParseInt(a),
+            bAsInt = tryParseInt(b);
+        if (aAsInt !== null) {
+            if (bAsInt !== null) {
+                return aAsInt - bAsInt == 0 ? a.length - b.length : aAsInt - bAsInt;
+            } else {
+                return -1;
+            }
+        } else if (bAsInt !== null) {
+            return 1;
+        } else {
+            return a < b ? -1 : 1;
+        }
+    }
+};
+
+var stringCompare = exports.stringCompare = function stringCompare(a, b) {
+    if (a === b) {
+        return 0;
+    } else if (a < b) {
+        return -1;
+    } else {
+        return 1;
+    }
+};
+
+var requireKey = exports.requireKey = function requireKey(key, obj) {
+    if (obj && key in obj) {
+        return obj[key];
+    } else {
+        throw new Error('Missing required key (' + key + ') in object: ' + (0, _json.stringify)(obj));
+    }
+};
+
+var ObjectToUniqueKey = exports.ObjectToUniqueKey = function ObjectToUniqueKey(obj) {
+    if ((typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) !== 'object' || obj === null) return (0, _json.stringify)(obj);
+    var keys = [];
+    for (var k in obj) {
+        keys.push(k);
+    }
+
+    keys.sort();
+    var key = '{';
+    for (var i = 0; i < keys.length; i++) {
+        if (i !== 0) key += ',';
+        key += (0, _json.stringify)(keys[i]);
+        key += ':';
+        key += ObjectToUniqueKey(obj[keys[i]]);
+    }
+    key += '}';
+    return key;
+};
+
+var splitStringBySize = exports.splitStringBySize = function splitStringBySize(str, segsize) {
+    var len = str.length;
+    if (len <= segsize) {
+        return [str];
+    }
+    var dataSegs = [];
+    for (var c = 0; c < len; c += segsize) {
+        if (c + segsize > len) {
+            dataSegs.push(str.substring(c, len));
+        } else {
+            dataSegs.push(str.substring(c, c + segsize));
+        }
+    }
+    return dataSegs;
+};
+
+var each = exports.each = function each(obj, fn) {
+    if (Array.isArray(obj)) {
+        for (var i = 0; i < obj.length; ++i) {
+            fn(i, obj[i]);
+        }
+    } else {
+        (0, _obj.forEach)(obj, function (key, val) {
+            return fn(val, key);
+        });
+    }
+};
+
+var bindCallback = exports.bindCallback = function bindCallback(callback, context) {
+    return context ? callback.bind(context) : callback;
+};
+
+var doubleToIEEE754String = exports.doubleToIEEE754String = function doubleToIEEE754String(v) {
+    (0, _assert.assert)(!isInvalidJSONNumber(v), 'Invalid JSON number');
+    var ebits = 11,
+        fbits = 52;
+    var bias = (1 << ebits - 1) - 1,
+        s,
+        e,
+        f,
+        ln,
+        i,
+        bits,
+        str;
+
+    if (v === 0) {
+        e = 0;
+        f = 0;
+        s = 1 / v === -Infinity ? 1 : 0;
+    } else {
+        s = v < 0;
+        v = Math.abs(v);
+        if (v >= Math.pow(2, 1 - bias)) {
+            ln = Math.min(Math.floor(Math.log(v) / Math.LN2), bias);
+            e = ln + bias;
+            f = Math.round(v * Math.pow(2, fbits - ln) - Math.pow(2, fbits));
+        } else {
+            e = 0;
+            f = Math.round(v / Math.pow(2, 1 - bias - fbits));
+        }
+    }
+
+    bits = [];
+    for (i = fbits; i; i -= 1) {
+        bits.push(f % 2 ? 1 : 0);
+        f = Math.floor(f / 2);
+    }
+    for (i = ebits; i; i -= 1) {
+        bits.push(e % 2 ? 1 : 0);
+        e = Math.floor(e / 2);
+    }
+    bits.push(s ? 1 : 0);
+    bits.reverse();
+    str = bits.join('');
+
+    var hexByteString = '';
+    for (i = 0; i < 64; i += 8) {
+        var hexByte = parseInt(str.substr(i, 8), 2).toString(16);
+        if (hexByte.length === 1) hexByte = '0' + hexByte;
+        hexByteString = hexByteString + hexByte;
+    }
+    return hexByteString.toLowerCase();
+};
+
+var isChromeExtensionContentScript = exports.isChromeExtensionContentScript = function isChromeExtensionContentScript() {
+    return !!((typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object' && window['chrome'] && window['chrome']['extension'] && !/^chrome/.test(window.location.href));
+};
+
+var isWindowsStoreApp = exports.isWindowsStoreApp = function isWindowsStoreApp() {
+    return (typeof Windows === 'undefined' ? 'undefined' : _typeof(Windows)) === 'object' && _typeof(Windows.UI) === 'object';
+};
+
+var errorForServerCode = exports.errorForServerCode = function errorForServerCode(code, query) {
+    var reason = 'Unknown Error';
+    if (code === 'too_big') {
+        reason = 'The data requested exceeds the maximum size ' + 'that can be accessed with a single request.';
+    } else if (code == 'permission_denied') {
+        reason = "Client doesn't have permission to access the desired data.";
+    } else if (code == 'unavailable') {
+        reason = 'The service is unavailable';
+    }
+    var error = new Error(code + ' at ' + query.path.toString() + ': ' + reason);
+    error.code = code.toUpperCase();
+    return error;
+};
+
+var INTEGER_REGEXP_ = exports.INTEGER_REGEXP_ = new RegExp('^-?\\d{1,10}$');
+
+var tryParseInt = exports.tryParseInt = function tryParseInt(str) {
+    if (INTEGER_REGEXP_.test(str)) {
+        var intVal = Number(str);
+        if (intVal >= -2147483648 && intVal <= 2147483647) {
+            return intVal;
+        }
+    }
+    return null;
+};
+
+var exceptionGuard = exports.exceptionGuard = function exceptionGuard(fn) {
+    try {
+        fn();
+    } catch (e) {
+        setTimeout(function () {
+            var stack = e.stack || '';
+            warn('Exception was thrown by user callback.', stack);
+            throw e;
+        }, Math.floor(0));
+    }
+};
+
+var callUserCallback = exports.callUserCallback = function callUserCallback(callback) {
+    var var_args = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        var_args[_i - 1] = arguments[_i];
+    }
+    if (typeof callback === 'function') {
+        exceptionGuard(function () {
+            callback.apply(void 0, var_args);
+        });
+    }
+};
+
+var beingCrawled = exports.beingCrawled = function beingCrawled() {
+    var userAgent = (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object' && window['navigator'] && window['navigator']['userAgent'] || '';
+
+    return userAgent.search(/googlebot|google webmaster tools|bingbot|yahoo! slurp|baiduspider|yandexbot|duckduckbot/i) >= 0;
+};
+
+var exportPropGetter = exports.exportPropGetter = function exportPropGetter(object, name, fnGet) {
+    Object.defineProperty(object, name, { get: fnGet });
+};
+
+var setTimeoutNonBlocking = exports.setTimeoutNonBlocking = function setTimeoutNonBlocking(fn, time) {
+    var timeout = setTimeout(fn, time);
+    if ((typeof timeout === 'undefined' ? 'undefined' : _typeof(timeout)) === 'object' && timeout['unref']) {
+        timeout['unref']();
+    }
+    return timeout;
+};

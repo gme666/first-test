@@ -1,0 +1,20 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.NAME_ONLY_COMPARATOR = NAME_ONLY_COMPARATOR;
+exports.NAME_COMPARATOR = NAME_COMPARATOR;
+
+var _util = require('../util/util');
+
+function NAME_ONLY_COMPARATOR(left, right) {
+    return (0, _util.nameCompare)(left.name, right.name);
+}
+function NAME_COMPARATOR(left, right) {
+    return (0, _util.nameCompare)(left, right);
+}

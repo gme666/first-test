@@ -1,0 +1,56 @@
+b404879662e8b85d8c545f254792e345
+Object.defineProperty(exports,"__esModule",{value:true});var _extends=Object.assign||function(target){for(var i=1;i<arguments.length;i++){var source=arguments[i];for(var key in source){if(Object.prototype.hasOwnProperty.call(source,key)){target[key]=source[key];}}}return target;};var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=require('react');var _react2=_interopRequireDefault(_react);
+var _propTypes=require('prop-types');var _propTypes2=_interopRequireDefault(_propTypes);
+var _createReactNativeComponentClass=require('react-native/Libraries/Renderer/shims/createReactNativeComponentClass.js');var _createReactNativeComponentClass2=_interopRequireDefault(_createReactNativeComponentClass);
+var _attributes=require('../lib/attributes');
+var _extractText=require('../lib/extract/extractText');var _extractText2=_interopRequireDefault(_extractText);
+var _Shape2=require('./Shape');var _Shape3=_interopRequireDefault(_Shape2);
+var _props2=require('../lib/props');
+var _extractProps=require('../lib/extract/extractProps');var _extractProps2=_interopRequireDefault(_extractProps);
+var _TSpan=require('./TSpan');var _TSpan2=_interopRequireDefault(_TSpan);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _objectWithoutProperties(obj,keys){var target={};for(var i in obj){if(keys.indexOf(i)>=0)continue;if(!Object.prototype.hasOwnProperty.call(obj,i))continue;target[i]=obj[i];}return target;}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}
+
+var idExpReg=/^#(.+)$/;var _class=function(_Shape){_inherits(_class,_Shape);function _class(){_classCallCheck(this,_class);return _possibleConstructorReturn(this,(_class.__proto__||Object.getPrototypeOf(_class)).apply(this,arguments));}_createClass(_class,[{key:'render',value:function render()
+
+
+
+
+
+
+
+
+
+
+
+{var _props=
+this.props,children=_props.children,href=_props.href,startOffset=_props.startOffset,props=_objectWithoutProperties(_props,['children','href','startOffset']);
+if(href){
+var matched=href.match(idExpReg);
+
+if(matched){
+href=matched[1];
+
+return _react2.default.createElement(RNSVGTextPath,_extends({
+href:href},
+(0,_extractProps2.default)(_extends({},
+props,{
+x:null,
+y:null}),
+this),
+(0,_extractText2.default)({
+children:children,
+startOffset:startOffset},
+true)));
+
+}
+}
+
+console.warn('Invalid `href` prop for `TextPath` element, expected a href like `"#id"`, but got: "'+props.href+'"');
+return _react2.default.createElement(_TSpan2.default,null,children);
+}}]);return _class;}(_Shape3.default);_class.displayName='Span';_class.propTypes=_extends({},_props2.pathProps,_props2.fontProps,{href:_propTypes2.default.string.isRequired,startOffset:_props2.numberProp});exports.default=_class;
+
+
+
+var RNSVGTextPath=(0,_createReactNativeComponentClass2.default)({
+validAttributes:_attributes.TextPathAttributes,
+uiViewClassName:'RNSVGTextPath'});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIlRleHRQYXRoLmpzIl0sIm5hbWVzIjpbImlkRXhwUmVnIiwicHJvcHMiLCJjaGlsZHJlbiIsImhyZWYiLCJzdGFydE9mZnNldCIsIm1hdGNoZWQiLCJtYXRjaCIsIngiLCJ5IiwiY29uc29sZSIsIndhcm4iLCJkaXNwbGF5TmFtZSIsInByb3BUeXBlcyIsInN0cmluZyIsImlzUmVxdWlyZWQiLCJSTlNWR1RleHRQYXRoIiwidmFsaWRBdHRyaWJ1dGVzIiwidWlWaWV3Q2xhc3NOYW1lIl0sIm1hcHBpbmdzIjoidXhCQUFBLDRCO0FBQ0EscUM7QUFDQSx5SDtBQUNBO0FBQ0EsdUQ7QUFDQSwrQjtBQUNBO0FBQ0EseUQ7QUFDQSw4Qjs7QUFFQSxHQUFNQSxVQUFXLFNBQWpCLEM7Ozs7Ozs7Ozs7OztBQVlhO0FBQ3lDLEtBQUtDLEtBRDlDLENBQ0FDLFFBREEsUUFDQUEsUUFEQSxDQUNVQyxJQURWLFFBQ1VBLElBRFYsQ0FDZ0JDLFdBRGhCLFFBQ2dCQSxXQURoQixDQUNnQ0gsS0FEaEM7QUFFTCxHQUFJRSxJQUFKLENBQVU7QUFDTixHQUFJRSxTQUFVRixLQUFLRyxLQUFMLENBQVdOLFFBQVgsQ0FBZDs7QUFFQSxHQUFJSyxPQUFKLENBQWE7QUFDVEYsS0FBT0UsUUFBUSxDQUFSLENBQVA7O0FBRUEsTUFBTywrQkFBQyxhQUFEO0FBQ0gsS0FBTUYsSUFESDtBQUVDO0FBQ0dGLEtBREg7QUFFQU0sRUFBRyxJQUZIO0FBR0FDLEVBQUcsSUFISDtBQUlELElBSkMsQ0FGRDtBQU9DLDBCQUFZO0FBQ1pOLGlCQURZO0FBRVpFLHVCQUZZLENBQVo7QUFHRCxJQUhDLENBUEQsRUFBUDs7QUFZSDtBQUNKOztBQUVESyxRQUFRQyxJQUFSLENBQWEsdUZBQXlGVCxNQUFNRSxJQUEvRixDQUFzRyxHQUFuSDtBQUNBLE1BQU8sb0RBQVFELFFBQVIsQ0FBUDtBQUNILEMsNENBbENNUyxXLENBQWMsTSxRQUVkQyxTLGtEQUdIVCxLQUFNLG9CQUFVVSxNQUFWLENBQWlCQyxVLENBQ3ZCViw4Qjs7OztBQWdDUixHQUFNVyxlQUFnQiw4Q0FBZ0M7QUFDbERDLDhDQURrRDtBQUVsREMsZ0JBQWlCLGVBRmlDLENBQWhDLENBQXRCIiwiZmlsZSI6IlRleHRQYXRoLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IFJlYWN0IGZyb20gJ3JlYWN0JztcbmltcG9ydCBQcm9wVHlwZXMgZnJvbSAncHJvcC10eXBlcyc7XG5pbXBvcnQgY3JlYXRlUmVhY3ROYXRpdmVDb21wb25lbnRDbGFzcyBmcm9tICdyZWFjdC1uYXRpdmUvTGlicmFyaWVzL1JlbmRlcmVyL3NoaW1zL2NyZWF0ZVJlYWN0TmF0aXZlQ29tcG9uZW50Q2xhc3MuanMnO1xuaW1wb3J0IHtUZXh0UGF0aEF0dHJpYnV0ZXN9IGZyb20gJy4uL2xpYi9hdHRyaWJ1dGVzJztcbmltcG9ydCBleHRyYWN0VGV4dCBmcm9tICcuLi9saWIvZXh0cmFjdC9leHRyYWN0VGV4dCc7XG5pbXBvcnQgU2hhcGUgZnJvbSAnLi9TaGFwZSc7XG5pbXBvcnQge3BhdGhQcm9wcywgZm9udFByb3BzLCBudW1iZXJQcm9wfSBmcm9tICcuLi9saWIvcHJvcHMnO1xuaW1wb3J0IGV4dHJhY3RQcm9wcyBmcm9tICcuLi9saWIvZXh0cmFjdC9leHRyYWN0UHJvcHMnO1xuaW1wb3J0IFRTcGFuIGZyb20gJy4vVFNwYW4nO1xuXG5jb25zdCBpZEV4cFJlZyA9IC9eIyguKykkLztcblxuZXhwb3J0IGRlZmF1bHQgY2xhc3MgZXh0ZW5kcyBTaGFwZSB7XG4gICAgc3RhdGljIGRpc3BsYXlOYW1lID0gJ1NwYW4nO1xuXG4gICAgc3RhdGljIHByb3BUeXBlcyA9IHtcbiAgICAgICAgLi4ucGF0aFByb3BzLFxuICAgICAgICAuLi5mb250UHJvcHMsXG4gICAgICAgIGhyZWY6IFByb3BUeXBlcy5zdHJpbmcuaXNSZXF1aXJlZCxcbiAgICAgICAgc3RhcnRPZmZzZXQ6IG51bWJlclByb3BcbiAgICB9O1xuXG4gICAgcmVuZGVyKCkge1xuICAgICAgICBsZXQge2NoaWxkcmVuLCBocmVmLCBzdGFydE9mZnNldCwgLi4ucHJvcHN9ID0gdGhpcy5wcm9wcztcbiAgICAgICAgaWYgKGhyZWYpIHtcbiAgICAgICAgICAgIGxldCBtYXRjaGVkID0gaHJlZi5tYXRjaChpZEV4cFJlZyk7XG5cbiAgICAgICAgICAgIGlmIChtYXRjaGVkKSB7XG4gICAgICAgICAgICAgICAgaHJlZiA9IG1hdGNoZWRbMV07XG5cbiAgICAgICAgICAgICAgICByZXR1cm4gPFJOU1ZHVGV4dFBhdGhcbiAgICAgICAgICAgICAgICAgICAgaHJlZj17aHJlZn1cbiAgICAgICAgICAgICAgICAgICAgey4uLmV4dHJhY3RQcm9wcyh7XG4gICAgICAgICAgICAgICAgICAgICAgICAuLi5wcm9wcyxcbiAgICAgICAgICAgICAgICAgICAgICAgIHg6IG51bGwsXG4gICAgICAgICAgICAgICAgICAgICAgICB5OiBudWxsXG4gICAgICAgICAgICAgICAgICAgIH0sIHRoaXMpfVxuICAgICAgICAgICAgICAgICAgICB7Li4uZXh0cmFjdFRleHQoe1xuICAgICAgICAgICAgICAgICAgICAgICAgY2hpbGRyZW4sXG4gICAgICAgICAgICAgICAgICAgICAgICBzdGFydE9mZnNldFxuICAgICAgICAgICAgICAgICAgICB9LCB0cnVlKX1cbiAgICAgICAgICAgICAgICAvPjtcbiAgICAgICAgICAgIH1cbiAgICAgICAgfVxuXG4gICAgICAgIGNvbnNvbGUud2FybignSW52YWxpZCBgaHJlZmAgcHJvcCBmb3IgYFRleHRQYXRoYCBlbGVtZW50LCBleHBlY3RlZCBhIGhyZWYgbGlrZSBgXCIjaWRcImAsIGJ1dCBnb3Q6IFwiJyArIHByb3BzLmhyZWYgKyAnXCInKTtcbiAgICAgICAgcmV0dXJuIDxUU3Bhbj57Y2hpbGRyZW59PC9UU3Bhbj5cbiAgICB9XG5cbn1cblxuY29uc3QgUk5TVkdUZXh0UGF0aCA9IGNyZWF0ZVJlYWN0TmF0aXZlQ29tcG9uZW50Q2xhc3Moe1xuICAgIHZhbGlkQXR0cmlidXRlczogVGV4dFBhdGhBdHRyaWJ1dGVzLFxuICAgIHVpVmlld0NsYXNzTmFtZTogJ1JOU1ZHVGV4dFBhdGgnXG59KTtcbiJdfQ==

@@ -1,0 +1,35 @@
+dcaba63e30ab703852b6405c25803f48
+Object.defineProperty(exports,"__esModule",{value:true});var _extends=Object.assign||function(target){for(var i=1;i<arguments.length;i++){var source=arguments[i];for(var key in source){if(Object.prototype.hasOwnProperty.call(source,key)){target[key]=source[key];}}}return target;};var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=require('react');var _react2=_interopRequireDefault(_react);
+var _propTypes=require('prop-types');var _propTypes2=_interopRequireDefault(_propTypes);
+var _Path=require('./Path');var _Path2=_interopRequireDefault(_Path);
+var _props=require('../lib/props');
+var _extractPolyPoints=require('../lib/extract/extractPolyPoints');var _extractPolyPoints2=_interopRequireDefault(_extractPolyPoints);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var _class=function(_Component){_inherits(_class,_Component);function _class(){var _ref;var _temp,_this,_ret;_classCallCheck(this,_class);for(var _len=arguments.length,args=Array(_len),_key=0;_key<_len;_key++){args[_key]=arguments[_key];}return _ret=(_temp=(_this=_possibleConstructorReturn(this,(_ref=_class.__proto__||Object.getPrototypeOf(_class)).call.apply(_ref,[this].concat(args))),_this),_initialiseProps.call(_this),_temp),_possibleConstructorReturn(_this,_ret);}_createClass(_class,[{key:'render',value:function render()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{var _this2=this;
+var points=this.props.points;
+if(Array.isArray(points)){
+points=points.join(',');
+}
+
+return _react2.default.createElement(_Path2.default,_extends({
+ref:function ref(ele){_this2.root=ele;}},
+this.props,{
+d:'M'+(0,_extractPolyPoints2.default)(points)}));
+
+}}]);return _class;}(_react.Component);_class.displayName='Polyline';_class.propTypes=_extends({},_props.pathProps,{points:_propTypes2.default.oneOfType([_propTypes2.default.string,_propTypes2.default.array]).isRequired});_class.defaultProps={points:''};var _initialiseProps=function _initialiseProps(){var _this3=this;this.setNativeProps=function(){var _root$getNativeElemen;(_root$getNativeElemen=_this3.root.getNativeElement()).setNativeProps.apply(_root$getNativeElemen,arguments);};};exports.default=_class;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIlBvbHlsaW5lLmpzIl0sIm5hbWVzIjpbInBvaW50cyIsInByb3BzIiwiQXJyYXkiLCJpc0FycmF5Iiwiam9pbiIsInJvb3QiLCJlbGUiLCJkaXNwbGF5TmFtZSIsInByb3BUeXBlcyIsIm9uZU9mVHlwZSIsInN0cmluZyIsImFycmF5IiwiaXNSZXF1aXJlZCIsImRlZmF1bHRQcm9wcyIsInNldE5hdGl2ZVByb3BzIiwiZ2V0TmF0aXZlRWxlbWVudCJdLCJtYXBwaW5ncyI6InV4QkFBQSw0QjtBQUNBLHFDO0FBQ0EsNEI7QUFDQTtBQUNBLG1FOzs7Ozs7Ozs7Ozs7Ozs7OztBQWlCYTtBQUNMLEdBQUlBLFFBQVMsS0FBS0MsS0FBTCxDQUFXRCxNQUF4QjtBQUNBLEdBQUlFLE1BQU1DLE9BQU4sQ0FBY0gsTUFBZCxDQUFKLENBQTJCO0FBQ3ZCQSxPQUFTQSxPQUFPSSxJQUFQLENBQVksR0FBWixDQUFUO0FBQ0g7O0FBRUQsTUFBTztBQUNILElBQUssaUJBQU8sQ0FBQyxPQUFLQyxJQUFMLENBQVlDLEdBQVosQ0FBaUIsQ0FEM0I7QUFFQyxLQUFLTCxLQUZOO0FBR0gsTUFBTyxnQ0FBa0JELE1BQWxCLENBSEosR0FBUDs7QUFLSCxDLDZDQXpCTU8sVyxDQUFjLFUsUUFDZEMsUywrQkFFSFIsT0FBUSxvQkFBVVMsU0FBVixDQUFvQixDQUFDLG9CQUFVQyxNQUFYLENBQW1CLG9CQUFVQyxLQUE3QixDQUFwQixFQUF5REMsVSxVQUc5REMsWSxDQUFlLENBQ2xCYixPQUFRLEVBRFUsQyx1RUFJdEJjLGMsQ0FBaUIsVUFBYSwyQkFDMUIsOEJBQUtULElBQUwsQ0FBVVUsZ0JBQVYsSUFBNkJELGNBQTdCLHdDQUNILEMiLCJmaWxlIjoiUG9seWxpbmUuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgUmVhY3QsIHtDb21wb25lbnR9IGZyb20gJ3JlYWN0JztcbmltcG9ydCBQcm9wVHlwZXMgZnJvbSAncHJvcC10eXBlcyc7XG5pbXBvcnQgUGF0aCBmcm9tICcuL1BhdGgnO1xuaW1wb3J0IHtwYXRoUHJvcHN9IGZyb20gJy4uL2xpYi9wcm9wcyc7XG5pbXBvcnQgZXh0cmFjdFBvbHlQb2ludHMgZnJvbSAnLi4vbGliL2V4dHJhY3QvZXh0cmFjdFBvbHlQb2ludHMnO1xuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBleHRlbmRzIENvbXBvbmVudHtcbiAgICBzdGF0aWMgZGlzcGxheU5hbWUgPSAnUG9seWxpbmUnO1xuICAgIHN0YXRpYyBwcm9wVHlwZXMgPSB7XG4gICAgICAgIC4uLnBhdGhQcm9wcyxcbiAgICAgICAgcG9pbnRzOiBQcm9wVHlwZXMub25lT2ZUeXBlKFtQcm9wVHlwZXMuc3RyaW5nLCBQcm9wVHlwZXMuYXJyYXldKS5pc1JlcXVpcmVkXG4gICAgfTtcblxuICAgIHN0YXRpYyBkZWZhdWx0UHJvcHMgPSB7XG4gICAgICAgIHBvaW50czogJydcbiAgICB9O1xuXG4gICAgc2V0TmF0aXZlUHJvcHMgPSAoLi4uYXJncykgPT4ge1xuICAgICAgICB0aGlzLnJvb3QuZ2V0TmF0aXZlRWxlbWVudCgpLnNldE5hdGl2ZVByb3BzKC4uLmFyZ3MpO1xuICAgIH07XG5cbiAgICByZW5kZXIoKSB7XG4gICAgICAgIGxldCBwb2ludHMgPSB0aGlzLnByb3BzLnBvaW50cztcbiAgICAgICAgaWYgKEFycmF5LmlzQXJyYXkocG9pbnRzKSkge1xuICAgICAgICAgICAgcG9pbnRzID0gcG9pbnRzLmpvaW4oJywnKTtcbiAgICAgICAgfVxuXG4gICAgICAgIHJldHVybiA8UGF0aFxuICAgICAgICAgICAgcmVmPXtlbGUgPT4ge3RoaXMucm9vdCA9IGVsZTt9fVxuICAgICAgICAgICAgey4uLnRoaXMucHJvcHN9XG4gICAgICAgICAgICBkPXtgTSR7ZXh0cmFjdFBvbHlQb2ludHMocG9pbnRzKX1gfVxuICAgICAgICAvPjtcbiAgICB9XG59XG4iXX0=

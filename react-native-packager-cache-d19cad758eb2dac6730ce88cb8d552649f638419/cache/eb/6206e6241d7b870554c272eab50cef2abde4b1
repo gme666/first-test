@@ -1,0 +1,99 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.parseURL = exports.parseRepoInfo = undefined;
+
+var _Path = require('../Path');
+
+var _RepoInfo = require('../../RepoInfo');
+
+var _util = require('../util');
+
+function decodePath(pathString) {
+    var pathStringDecoded = '';
+    var pieces = pathString.split('/');
+    for (var i = 0; i < pieces.length; i++) {
+        if (pieces[i].length > 0) {
+            var piece = pieces[i];
+            try {
+                piece = decodeURIComponent(piece.replace(/\+/g, ' '));
+            } catch (e) {}
+            pathStringDecoded += '/' + piece;
+        }
+    }
+    return pathStringDecoded;
+}
+
+var parseRepoInfo = exports.parseRepoInfo = function parseRepoInfo(dataURL) {
+    var parsedUrl = parseURL(dataURL),
+        namespace = parsedUrl.subdomain;
+    if (parsedUrl.domain === 'firebase') {
+        (0, _util.fatal)(parsedUrl.host + ' is no longer supported. ' + 'Please use <YOUR FIREBASE>.firebaseio.com instead');
+    }
+
+    if (!namespace || namespace == 'undefined') {
+        (0, _util.fatal)('Cannot parse Firebase url. Please use https://<YOUR FIREBASE>.firebaseio.com');
+    }
+    if (!parsedUrl.secure) {
+        (0, _util.warnIfPageIsSecure)();
+    }
+    var webSocketOnly = parsedUrl.scheme === 'ws' || parsedUrl.scheme === 'wss';
+    return {
+        repoInfo: new _RepoInfo.RepoInfo(parsedUrl.host, parsedUrl.secure, namespace, webSocketOnly),
+        path: new _Path.Path(parsedUrl.pathString)
+    };
+};
+
+var parseURL = exports.parseURL = function parseURL(dataURL) {
+    var host = '',
+        domain = '',
+        subdomain = '',
+        pathString = '';
+
+    var secure = true,
+        scheme = 'https',
+        port = 443;
+
+    if (typeof dataURL === 'string') {
+        var colonInd = dataURL.indexOf('//');
+        if (colonInd >= 0) {
+            scheme = dataURL.substring(0, colonInd - 1);
+            dataURL = dataURL.substring(colonInd + 2);
+        }
+
+        var slashInd = dataURL.indexOf('/');
+        if (slashInd === -1) {
+            slashInd = dataURL.length;
+        }
+        host = dataURL.substring(0, slashInd);
+        pathString = decodePath(dataURL.substring(slashInd));
+        var parts = host.split('.');
+        if (parts.length === 3) {
+            domain = parts[1];
+            subdomain = parts[0].toLowerCase();
+        } else if (parts.length === 2) {
+            domain = parts[0];
+        }
+
+        colonInd = host.indexOf(':');
+        if (colonInd >= 0) {
+            secure = scheme === 'https' || scheme === 'wss';
+            port = parseInt(host.substring(colonInd + 1), 10);
+        }
+    }
+    return {
+        host: host,
+        port: port,
+        domain: domain,
+        subdomain: subdomain,
+        secure: secure,
+        scheme: scheme,
+        pathString: pathString
+    };
+};

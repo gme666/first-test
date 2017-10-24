@@ -1,0 +1,41 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.interceptServerData = exports.dataUpdateCount = exports.statsIncrementCounter = exports.stats = exports.setSecurityDebugCallback = exports.isWebSocketsAvailable = exports.forceWebSockets = exports.forceLongPolling = undefined;
+
+var _WebSocketConnection = require('../realtime/WebSocketConnection');
+
+var _BrowserPollConnection = require('../realtime/BrowserPollConnection');
+
+var forceLongPolling = exports.forceLongPolling = function forceLongPolling() {
+    _WebSocketConnection.WebSocketConnection.forceDisallow();
+    _BrowserPollConnection.BrowserPollConnection.forceAllow();
+};
+var forceWebSockets = exports.forceWebSockets = function forceWebSockets() {
+    _BrowserPollConnection.BrowserPollConnection.forceDisallow();
+};
+
+var isWebSocketsAvailable = exports.isWebSocketsAvailable = function isWebSocketsAvailable() {
+    return _WebSocketConnection.WebSocketConnection['isAvailable']();
+};
+var setSecurityDebugCallback = exports.setSecurityDebugCallback = function setSecurityDebugCallback(ref, callback) {
+    ref.repo.persistentConnection_.securityDebugCallback_ = callback;
+};
+var stats = exports.stats = function stats(ref, showDelta) {
+    ref.repo.stats(showDelta);
+};
+var statsIncrementCounter = exports.statsIncrementCounter = function statsIncrementCounter(ref, metric) {
+    ref.repo.statsIncrementCounter(metric);
+};
+var dataUpdateCount = exports.dataUpdateCount = function dataUpdateCount(ref) {
+    return ref.repo.dataUpdateCount;
+};
+var interceptServerData = exports.interceptServerData = function interceptServerData(ref, callback) {
+    return ref.repo.interceptServerData_(callback);
+};

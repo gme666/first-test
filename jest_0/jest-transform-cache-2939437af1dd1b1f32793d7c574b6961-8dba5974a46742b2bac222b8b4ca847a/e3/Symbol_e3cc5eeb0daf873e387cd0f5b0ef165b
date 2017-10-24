@@ -1,0 +1,30 @@
+9100bbba0da1a2c6fb076be268087612
+Object.defineProperty(exports,"__esModule",{value:true});var _extends=Object.assign||function(target){for(var i=1;i<arguments.length;i++){var source=arguments[i];for(var key in source){if(Object.prototype.hasOwnProperty.call(source,key)){target[key]=source[key];}}}return target;};var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=require('react');var _react2=_interopRequireDefault(_react);
+var _propTypes=require('prop-types');var _propTypes2=_interopRequireDefault(_propTypes);
+var _extractViewBox=require('../lib/extract/extractViewBox');var _extractViewBox2=_interopRequireDefault(_extractViewBox);
+var _createReactNativeComponentClass=require('react-native/Libraries/Renderer/shims/createReactNativeComponentClass.js');var _createReactNativeComponentClass2=_interopRequireDefault(_createReactNativeComponentClass);
+var _attributes=require('../lib/attributes');function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var _class=function(_Component){_inherits(_class,_Component);function _class(){_classCallCheck(this,_class);return _possibleConstructorReturn(this,(_class.__proto__||Object.getPrototypeOf(_class)).apply(this,arguments));}_createClass(_class,[{key:'render',value:function render()
+
+
+
+
+
+
+
+
+{var
+props=this.props;
+
+return _react2.default.createElement(RNSVGSymbol,_extends({
+name:props.id},
+(0,_extractViewBox2.default)(props)),
+
+props.children);
+
+}}]);return _class;}(_react.Component);_class.displayName='Symbol';_class.propTypes={id:_propTypes2.default.string.isRequired,viewBox:_propTypes2.default.string,preserveAspectRatio:_propTypes2.default.string};exports.default=_class;
+
+
+var RNSVGSymbol=(0,_createReactNativeComponentClass2.default)({
+validAttributes:_attributes.SymbolAttributes,
+uiViewClassName:'RNSVGSymbol'});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIlN5bWJvbC5qcyJdLCJuYW1lcyI6WyJwcm9wcyIsImlkIiwiY2hpbGRyZW4iLCJkaXNwbGF5TmFtZSIsInByb3BUeXBlcyIsInN0cmluZyIsImlzUmVxdWlyZWQiLCJ2aWV3Qm94IiwicHJlc2VydmVBc3BlY3RSYXRpbyIsIlJOU1ZHU3ltYm9sIiwidmFsaWRBdHRyaWJ1dGVzIiwidWlWaWV3Q2xhc3NOYW1lIl0sIm1hcHBpbmdzIjoidXhCQUFBLDRCO0FBQ0EscUM7QUFDQSw2RDtBQUNBLHlIO0FBQ0EsNkM7Ozs7Ozs7OztBQVNhO0FBQ0FBLEtBREEsQ0FDUyxJQURULENBQ0FBLEtBREE7O0FBR0wsTUFBTywrQkFBQyxXQUFEO0FBQ0gsS0FBTUEsTUFBTUMsRUFEVDtBQUVDLDZCQUFlRCxLQUFmLENBRkQ7O0FBSUZBLE1BQU1FLFFBSkosQ0FBUDs7QUFNSCxDLDZDQWZNQyxXLENBQWMsUSxRQUNkQyxTLENBQVksQ0FDZkgsR0FBSSxvQkFBVUksTUFBVixDQUFpQkMsVUFETixDQUVmQyxRQUFTLG9CQUFVRixNQUZKLENBR2ZHLG9CQUFxQixvQkFBVUgsTUFIaEIsQzs7O0FBaUJ2QixHQUFNSSxhQUFjLDhDQUFnQztBQUNoREMsNENBRGdEO0FBRWhEQyxnQkFBaUIsYUFGK0IsQ0FBaEMsQ0FBcEIiLCJmaWxlIjoiU3ltYm9sLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IFJlYWN0LCB7Q29tcG9uZW50fSBmcm9tICdyZWFjdCc7XG5pbXBvcnQgUHJvcFR5cGVzIGZyb20gJ3Byb3AtdHlwZXMnO1xuaW1wb3J0IGV4dHJhY3RWaWV3Qm94IGZyb20gJy4uL2xpYi9leHRyYWN0L2V4dHJhY3RWaWV3Qm94JztcbmltcG9ydCBjcmVhdGVSZWFjdE5hdGl2ZUNvbXBvbmVudENsYXNzIGZyb20gJ3JlYWN0LW5hdGl2ZS9MaWJyYXJpZXMvUmVuZGVyZXIvc2hpbXMvY3JlYXRlUmVhY3ROYXRpdmVDb21wb25lbnRDbGFzcy5qcyc7XG5pbXBvcnQge1N5bWJvbEF0dHJpYnV0ZXN9IGZyb20gJy4uL2xpYi9hdHRyaWJ1dGVzJztcblxuZXhwb3J0IGRlZmF1bHQgY2xhc3MgZXh0ZW5kcyBDb21wb25lbnR7XG4gICAgc3RhdGljIGRpc3BsYXlOYW1lID0gJ1N5bWJvbCc7XG4gICAgc3RhdGljIHByb3BUeXBlcyA9IHtcbiAgICAgICAgaWQ6IFByb3BUeXBlcy5zdHJpbmcuaXNSZXF1aXJlZCxcbiAgICAgICAgdmlld0JveDogUHJvcFR5cGVzLnN0cmluZyxcbiAgICAgICAgcHJlc2VydmVBc3BlY3RSYXRpbzogUHJvcFR5cGVzLnN0cmluZ1xuICAgIH07XG4gICAgcmVuZGVyKCkge1xuICAgICAgICBsZXQge3Byb3BzfSA9IHRoaXM7XG5cbiAgICAgICAgcmV0dXJuIDxSTlNWR1N5bWJvbFxuICAgICAgICAgICAgbmFtZT17cHJvcHMuaWR9XG4gICAgICAgICAgICB7Li4uZXh0cmFjdFZpZXdCb3gocHJvcHMpfVxuICAgICAgICA+XG4gICAgICAgICAgICB7cHJvcHMuY2hpbGRyZW59XG4gICAgICAgIDwvUk5TVkdTeW1ib2w+O1xuICAgIH1cbn1cblxuY29uc3QgUk5TVkdTeW1ib2wgPSBjcmVhdGVSZWFjdE5hdGl2ZUNvbXBvbmVudENsYXNzKHtcbiAgICB2YWxpZEF0dHJpYnV0ZXM6IFN5bWJvbEF0dHJpYnV0ZXMsXG4gICAgdWlWaWV3Q2xhc3NOYW1lOiAnUk5TVkdTeW1ib2wnXG59KTtcbiJdfQ==

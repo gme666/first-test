@@ -1,0 +1,49 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ViewCache = undefined;
+
+var _ChildrenNode = require('../snap/ChildrenNode');
+
+var _CacheNode = require('./CacheNode');
+
+var ViewCache = function () {
+  function ViewCache(eventCache_, serverCache_) {
+    this.eventCache_ = eventCache_;
+    this.serverCache_ = serverCache_;
+  }
+
+  ViewCache.prototype.updateEventSnap = function (eventSnap, complete, filtered) {
+    return new ViewCache(new _CacheNode.CacheNode(eventSnap, complete, filtered), this.serverCache_);
+  };
+
+  ViewCache.prototype.updateServerSnap = function (serverSnap, complete, filtered) {
+    return new ViewCache(this.eventCache_, new _CacheNode.CacheNode(serverSnap, complete, filtered));
+  };
+
+  ViewCache.prototype.getEventCache = function () {
+    return this.eventCache_;
+  };
+
+  ViewCache.prototype.getCompleteEventSnap = function () {
+    return this.eventCache_.isFullyInitialized() ? this.eventCache_.getNode() : null;
+  };
+
+  ViewCache.prototype.getServerCache = function () {
+    return this.serverCache_;
+  };
+
+  ViewCache.prototype.getCompleteServerSnap = function () {
+    return this.serverCache_.isFullyInitialized() ? this.serverCache_.getNode() : null;
+  };
+
+  ViewCache.Empty = new ViewCache(new _CacheNode.CacheNode(_ChildrenNode.ChildrenNode.EMPTY_NODE, false, false), new _CacheNode.CacheNode(_ChildrenNode.ChildrenNode.EMPTY_NODE, false, false));
+  return ViewCache;
+}();
+exports.ViewCache = ViewCache;

@@ -1,0 +1,49 @@
+726c69e726018e997ac5ff6208219114
+Object.defineProperty(exports,"__esModule",{value:true});var _extends=Object.assign||function(target){for(var i=1;i<arguments.length;i++){var source=arguments[i];for(var key in source){if(Object.prototype.hasOwnProperty.call(source,key)){target[key]=source[key];}}}return target;};var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=require('react');var _react2=_interopRequireDefault(_react);
+var _propTypes=require('prop-types');var _propTypes2=_interopRequireDefault(_propTypes);
+var _props=require('../lib/props');
+var _extractGradient=require('../lib/extract/extractGradient');var _extractGradient2=_interopRequireDefault(_extractGradient);
+var _createReactNativeComponentClass=require('react-native/Libraries/Renderer/shims/createReactNativeComponentClass.js');var _createReactNativeComponentClass2=_interopRequireDefault(_createReactNativeComponentClass);
+var _attributes=require('../lib/attributes');function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var _class=function(_Component){_inherits(_class,_Component);function _class(){_classCallCheck(this,_class);return _possibleConstructorReturn(this,(_class.__proto__||Object.getPrototypeOf(_class)).apply(this,arguments));}_createClass(_class,[{key:'render',value:function render()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{var
+props=this.props;
+return _react2.default.createElement(RNSVGRadialGradient,_extends({
+fx:props.fx.toString(),
+fy:props.fy.toString(),
+rx:(props.rx||props.r).toString(),
+ry:(props.ry||props.r).toString(),
+cx:props.cx.toString(),
+cy:props.cy.toString()},
+(0,_extractGradient2.default)(this.props)));
+
+
+}}]);return _class;}(_react.Component);_class.displayName='RadialGradient';_class.propTypes={fx:_props.numberProp.isRequired,fy:_props.numberProp.isRequired,rx:_props.numberProp,ry:_props.numberProp,cx:_props.numberProp.isRequired,cy:_props.numberProp.isRequired,r:_props.numberProp,gradientUnits:_propTypes2.default.oneOf(['objectBoundingBox','userSpaceOnUse']),id:_propTypes2.default.string.isRequired};_class.defaultProps={fx:'50%',fy:'50%',cx:'50%',cy:'50%',r:'50%'};exports.default=_class;
+
+
+var RNSVGRadialGradient=(0,_createReactNativeComponentClass2.default)({
+validAttributes:_attributes.RadialGradientAttributes,
+uiViewClassName:'RNSVGRadialGradient'});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIlJhZGlhbEdyYWRpZW50LmpzIl0sIm5hbWVzIjpbInByb3BzIiwiZngiLCJ0b1N0cmluZyIsImZ5IiwicngiLCJyIiwicnkiLCJjeCIsImN5IiwiZGlzcGxheU5hbWUiLCJwcm9wVHlwZXMiLCJpc1JlcXVpcmVkIiwiZ3JhZGllbnRVbml0cyIsIm9uZU9mIiwiaWQiLCJzdHJpbmciLCJkZWZhdWx0UHJvcHMiLCJSTlNWR1JhZGlhbEdyYWRpZW50IiwidmFsaWRBdHRyaWJ1dGVzIiwidWlWaWV3Q2xhc3NOYW1lIl0sIm1hcHBpbmdzIjoidXhCQUFBLDRCO0FBQ0EscUM7QUFDQTtBQUNBLCtEO0FBQ0EseUg7QUFDQSw2Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBd0JhO0FBQ0FBLEtBREEsQ0FDUyxJQURULENBQ0FBLEtBREE7QUFFTCxNQUFPLCtCQUFDLG1CQUFEO0FBQ0gsR0FBSUEsTUFBTUMsRUFBTixDQUFTQyxRQUFULEVBREQ7QUFFSCxHQUFJRixNQUFNRyxFQUFOLENBQVNELFFBQVQsRUFGRDtBQUdILEdBQUksQ0FBQ0YsTUFBTUksRUFBTixFQUFZSixNQUFNSyxDQUFuQixFQUFzQkgsUUFBdEIsRUFIRDtBQUlILEdBQUksQ0FBQ0YsTUFBTU0sRUFBTixFQUFZTixNQUFNSyxDQUFuQixFQUFzQkgsUUFBdEIsRUFKRDtBQUtILEdBQUlGLE1BQU1PLEVBQU4sQ0FBU0wsUUFBVCxFQUxEO0FBTUgsR0FBSUYsTUFBTVEsRUFBTixDQUFTTixRQUFULEVBTkQ7QUFPQyw4QkFBZ0IsS0FBS0YsS0FBckIsQ0FQRCxFQUFQOzs7QUFVSCxDLDZDQWpDTVMsVyxDQUFjLGdCLFFBQ2RDLFMsQ0FBWSxDQUNmVCxHQUFJLGtCQUFXVSxVQURBLENBRWZSLEdBQUksa0JBQVdRLFVBRkEsQ0FHZlAsb0JBSGUsQ0FJZkUsb0JBSmUsQ0FLZkMsR0FBSSxrQkFBV0ksVUFMQSxDQU1mSCxHQUFJLGtCQUFXRyxVQU5BLENBT2ZOLG1CQVBlLENBUWZPLGNBQWUsb0JBQVVDLEtBQVYsQ0FBZ0IsQ0FBQyxtQkFBRCxDQUFzQixnQkFBdEIsQ0FBaEIsQ0FSQSxDQVNmQyxHQUFJLG9CQUFVQyxNQUFWLENBQWlCSixVQVROLEMsUUFZWkssWSxDQUFlLENBQ2xCZixHQUFJLEtBRGMsQ0FFbEJFLEdBQUksS0FGYyxDQUdsQkksR0FBSSxLQUhjLENBSWxCQyxHQUFJLEtBSmMsQ0FLbEJILEVBQUcsS0FMZSxDOzs7QUF1QjFCLEdBQU1ZLHFCQUFzQiw4Q0FBZ0M7QUFDeERDLG9EQUR3RDtBQUV4REMsZ0JBQWlCLHFCQUZ1QyxDQUFoQyxDQUE1QiIsImZpbGUiOiJSYWRpYWxHcmFkaWVudC5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBSZWFjdCwge0NvbXBvbmVudH0gZnJvbSAncmVhY3QnO1xuaW1wb3J0IFByb3BUeXBlcyBmcm9tICdwcm9wLXR5cGVzJztcbmltcG9ydCB7bnVtYmVyUHJvcH0gZnJvbSAnLi4vbGliL3Byb3BzJztcbmltcG9ydCBleHRyYWN0R3JhZGllbnQgZnJvbSAnLi4vbGliL2V4dHJhY3QvZXh0cmFjdEdyYWRpZW50JztcbmltcG9ydCBjcmVhdGVSZWFjdE5hdGl2ZUNvbXBvbmVudENsYXNzIGZyb20gJ3JlYWN0LW5hdGl2ZS9MaWJyYXJpZXMvUmVuZGVyZXIvc2hpbXMvY3JlYXRlUmVhY3ROYXRpdmVDb21wb25lbnRDbGFzcy5qcyc7XG5pbXBvcnQge1JhZGlhbEdyYWRpZW50QXR0cmlidXRlc30gZnJvbSAnLi4vbGliL2F0dHJpYnV0ZXMnO1xuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBleHRlbmRzIENvbXBvbmVudHtcbiAgICBzdGF0aWMgZGlzcGxheU5hbWUgPSAnUmFkaWFsR3JhZGllbnQnO1xuICAgIHN0YXRpYyBwcm9wVHlwZXMgPSB7XG4gICAgICAgIGZ4OiBudW1iZXJQcm9wLmlzUmVxdWlyZWQsXG4gICAgICAgIGZ5OiBudW1iZXJQcm9wLmlzUmVxdWlyZWQsXG4gICAgICAgIHJ4OiBudW1iZXJQcm9wLFxuICAgICAgICByeTogbnVtYmVyUHJvcCxcbiAgICAgICAgY3g6IG51bWJlclByb3AuaXNSZXF1aXJlZCxcbiAgICAgICAgY3k6IG51bWJlclByb3AuaXNSZXF1aXJlZCxcbiAgICAgICAgcjogbnVtYmVyUHJvcCxcbiAgICAgICAgZ3JhZGllbnRVbml0czogUHJvcFR5cGVzLm9uZU9mKFsnb2JqZWN0Qm91bmRpbmdCb3gnLCAndXNlclNwYWNlT25Vc2UnXSksXG4gICAgICAgIGlkOiBQcm9wVHlwZXMuc3RyaW5nLmlzUmVxdWlyZWRcbiAgICB9O1xuXG4gICAgc3RhdGljIGRlZmF1bHRQcm9wcyA9IHtcbiAgICAgICAgZng6ICc1MCUnLFxuICAgICAgICBmeTogJzUwJScsXG4gICAgICAgIGN4OiAnNTAlJyxcbiAgICAgICAgY3k6ICc1MCUnLFxuICAgICAgICByOiAnNTAlJ1xuICAgIH07XG5cbiAgICByZW5kZXIoKSB7XG4gICAgICAgIGxldCB7cHJvcHN9ID0gdGhpcztcbiAgICAgICAgcmV0dXJuIDxSTlNWR1JhZGlhbEdyYWRpZW50XG4gICAgICAgICAgICBmeD17cHJvcHMuZngudG9TdHJpbmcoKX1cbiAgICAgICAgICAgIGZ5PXtwcm9wcy5meS50b1N0cmluZygpfVxuICAgICAgICAgICAgcng9eyhwcm9wcy5yeCB8fCBwcm9wcy5yKS50b1N0cmluZygpfVxuICAgICAgICAgICAgcnk9eyhwcm9wcy5yeSB8fCBwcm9wcy5yKS50b1N0cmluZygpfVxuICAgICAgICAgICAgY3g9e3Byb3BzLmN4LnRvU3RyaW5nKCl9XG4gICAgICAgICAgICBjeT17cHJvcHMuY3kudG9TdHJpbmcoKX1cbiAgICAgICAgICAgIHsuLi5leHRyYWN0R3JhZGllbnQodGhpcy5wcm9wcyl9XG4gICAgICAgIC8+O1xuXG4gICAgfVxufVxuXG5jb25zdCBSTlNWR1JhZGlhbEdyYWRpZW50ID0gY3JlYXRlUmVhY3ROYXRpdmVDb21wb25lbnRDbGFzcyh7XG4gICAgdmFsaWRBdHRyaWJ1dGVzOiBSYWRpYWxHcmFkaWVudEF0dHJpYnV0ZXMsXG4gICAgdWlWaWV3Q2xhc3NOYW1lOiAnUk5TVkdSYWRpYWxHcmFkaWVudCdcbn0pO1xuIl19

@@ -1,0 +1,57 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.forceRestClient = exports.listens = exports.queryIdentifier = exports.ConnectionTarget = exports.hijackHash = exports.RealTimeConnection = exports.DataConnection = undefined;
+
+var _RepoInfo = require('../core/RepoInfo');
+
+var _PersistentConnection = require('../core/PersistentConnection');
+
+var _RepoManager = require('../core/RepoManager');
+
+var _Connection = require('../realtime/Connection');
+
+var DataConnection = exports.DataConnection = _PersistentConnection.PersistentConnection;
+
+_PersistentConnection.PersistentConnection.prototype.simpleListen = function (pathString, onComplete) {
+    this.sendRequest('q', { p: pathString }, onComplete);
+};
+
+_PersistentConnection.PersistentConnection.prototype.echo = function (data, onEcho) {
+    this.sendRequest('echo', { d: data }, onEcho);
+};
+
+var RealTimeConnection = exports.RealTimeConnection = _Connection.Connection;
+
+var hijackHash = exports.hijackHash = function hijackHash(newHash) {
+    var oldPut = _PersistentConnection.PersistentConnection.prototype.put;
+    _PersistentConnection.PersistentConnection.prototype.put = function (pathString, data, opt_onComplete, opt_hash) {
+        if (opt_hash !== undefined) {
+            opt_hash = newHash();
+        }
+        oldPut.call(this, pathString, data, opt_onComplete, opt_hash);
+    };
+    return function () {
+        _PersistentConnection.PersistentConnection.prototype.put = oldPut;
+    };
+};
+
+var ConnectionTarget = exports.ConnectionTarget = _RepoInfo.RepoInfo;
+
+var queryIdentifier = exports.queryIdentifier = function queryIdentifier(query) {
+    return query.queryIdentifier();
+};
+
+var listens = exports.listens = function listens(firebaseRef) {
+    return firebaseRef.repo.persistentConnection_.listens_;
+};
+
+var forceRestClient = exports.forceRestClient = function forceRestClient(_forceRestClient) {
+    _RepoManager.RepoManager.getInstance().forceRestClient(_forceRestClient);
+};

@@ -1,0 +1,31 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.SessionStorage = exports.PersistentStorage = undefined;
+
+var _DOMStorageWrapper = require('./DOMStorageWrapper');
+
+var _MemoryStorage = require('./MemoryStorage');
+
+var createStoragefor = function createStoragefor(domStorageName) {
+    try {
+        if (typeof window !== 'undefined' && typeof window[domStorageName] !== 'undefined') {
+            var domStorage = window[domStorageName];
+            domStorage.setItem('firebase:sentinel', 'cache');
+            domStorage.removeItem('firebase:sentinel');
+            return new _DOMStorageWrapper.DOMStorageWrapper(domStorage);
+        }
+    } catch (e) {}
+
+    return new _MemoryStorage.MemoryStorage();
+};
+
+var PersistentStorage = exports.PersistentStorage = createStoragefor('localStorage');
+
+var SessionStorage = exports.SessionStorage = createStoragefor('sessionStorage');

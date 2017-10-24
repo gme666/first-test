@@ -1,0 +1,85 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.PathIndex = undefined;
+
+var _assert = require('../../../../utils/assert');
+
+var _util = require('../../util/util');
+
+var _Index = require('./Index');
+
+var _ChildrenNode = require('../ChildrenNode');
+
+var _Node = require('../Node');
+
+var _nodeFromJSON = require('../nodeFromJSON');
+
+var __extends = undefined && undefined.__extends || function () {
+    var extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function (d, b) {
+        d.__proto__ = b;
+    } || function (d, b) {
+        for (var p in b) {
+            if (b.hasOwnProperty(p)) d[p] = b[p];
+        }
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() {
+            this.constructor = d;
+        }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+}();
+
+var PathIndex = function (_super) {
+    __extends(PathIndex, _super);
+    function PathIndex(indexPath_) {
+        var _this = _super.call(this) || this;
+        _this.indexPath_ = indexPath_;
+        (0, _assert.assert)(!indexPath_.isEmpty() && indexPath_.getFront() !== '.priority', "Can't create PathIndex with empty path or .priority key");
+        return _this;
+    }
+
+    PathIndex.prototype.extractChild = function (snap) {
+        return snap.getChild(this.indexPath_);
+    };
+
+    PathIndex.prototype.isDefinedOn = function (node) {
+        return !node.getChild(this.indexPath_).isEmpty();
+    };
+
+    PathIndex.prototype.compare = function (a, b) {
+        var aChild = this.extractChild(a.node);
+        var bChild = this.extractChild(b.node);
+        var indexCmp = aChild.compareTo(bChild);
+        if (indexCmp === 0) {
+            return (0, _util.nameCompare)(a.name, b.name);
+        } else {
+            return indexCmp;
+        }
+    };
+
+    PathIndex.prototype.makePost = function (indexValue, name) {
+        var valueNode = (0, _nodeFromJSON.nodeFromJSON)(indexValue);
+        var node = _ChildrenNode.ChildrenNode.EMPTY_NODE.updateChild(this.indexPath_, valueNode);
+        return new _Node.NamedNode(name, node);
+    };
+
+    PathIndex.prototype.maxPost = function () {
+        var node = _ChildrenNode.ChildrenNode.EMPTY_NODE.updateChild(this.indexPath_, _ChildrenNode.MAX_NODE);
+        return new _Node.NamedNode(_util.MAX_NAME, node);
+    };
+
+    PathIndex.prototype.toString = function () {
+        return this.indexPath_.slice().join('/');
+    };
+    return PathIndex;
+}(_Index.Index);
+exports.PathIndex = PathIndex;

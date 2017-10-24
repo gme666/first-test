@@ -1,0 +1,34 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.StatsManager = undefined;
+
+var _StatsCollection = require('./StatsCollection');
+
+var StatsManager = function () {
+    function StatsManager() {}
+    StatsManager.getCollection = function (repoInfo) {
+        var hashString = repoInfo.toString();
+        if (!this.collections_[hashString]) {
+            this.collections_[hashString] = new _StatsCollection.StatsCollection();
+        }
+        return this.collections_[hashString];
+    };
+    StatsManager.getOrCreateReporter = function (repoInfo, creatorFunction) {
+        var hashString = repoInfo.toString();
+        if (!this.reporters_[hashString]) {
+            this.reporters_[hashString] = creatorFunction();
+        }
+        return this.reporters_[hashString];
+    };
+    StatsManager.collections_ = {};
+    StatsManager.reporters_ = {};
+    return StatsManager;
+}();
+exports.StatsManager = StatsManager;

@@ -1,0 +1,277 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.WebSocketConnection = undefined;
+exports.setWebSocketImpl = setWebSocketImpl;
+
+var _app = require('../../app');
+
+var _app2 = _interopRequireDefault(_app);
+
+var _assert = require('../../utils/assert');
+
+var _util = require('../core/util/util');
+
+var _StatsManager = require('../core/stats/StatsManager');
+
+var _Constants = require('./Constants');
+
+var _constants = require('../../utils/constants');
+
+var _storage = require('../core/storage/storage');
+
+var _json = require('../../utils/json');
+
+var _environment = require('../../utils/environment');
+
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : { default: obj };
+}
+
+var WEBSOCKET_MAX_FRAME_SIZE = 16384;
+
+var WEBSOCKET_KEEPALIVE_INTERVAL = 45000;
+var WebSocketImpl = null;
+if (typeof MozWebSocket !== 'undefined') {
+    WebSocketImpl = MozWebSocket;
+} else if (typeof WebSocket !== 'undefined') {
+    WebSocketImpl = WebSocket;
+}
+function setWebSocketImpl(impl) {
+    WebSocketImpl = impl;
+}
+
+var WebSocketConnection = function () {
+    function WebSocketConnection(connId, repoInfo, transportSessionId, lastSessionId) {
+        this.connId = connId;
+        this.keepaliveTimer = null;
+        this.frames = null;
+        this.totalFrames = 0;
+        this.bytesSent = 0;
+        this.bytesReceived = 0;
+        this.log_ = (0, _util.logWrapper)(this.connId);
+        this.stats_ = _StatsManager.StatsManager.getCollection(repoInfo);
+        this.connURL = WebSocketConnection.connectionURL_(repoInfo, transportSessionId, lastSessionId);
+    }
+
+    WebSocketConnection.connectionURL_ = function (repoInfo, transportSessionId, lastSessionId) {
+        var urlParams = {};
+        urlParams[_Constants.VERSION_PARAM] = _Constants.PROTOCOL_VERSION;
+        if (!(0, _environment.isNodeSdk)() && typeof location !== 'undefined' && location.href && location.href.indexOf(_Constants.FORGE_DOMAIN) !== -1) {
+            urlParams[_Constants.REFERER_PARAM] = _Constants.FORGE_REF;
+        }
+        if (transportSessionId) {
+            urlParams[_Constants.TRANSPORT_SESSION_PARAM] = transportSessionId;
+        }
+        if (lastSessionId) {
+            urlParams[_Constants.LAST_SESSION_PARAM] = lastSessionId;
+        }
+        return repoInfo.connectionURL(_Constants.WEBSOCKET, urlParams);
+    };
+
+    WebSocketConnection.prototype.open = function (onMessage, onDisconnect) {
+        var _this = this;
+        this.onDisconnect = onDisconnect;
+        this.onMessage = onMessage;
+        this.log_('Websocket connecting to ' + this.connURL);
+        this.everConnected_ = false;
+
+        _storage.PersistentStorage.set('previous_websocket_failure', true);
+        try {
+            if ((0, _environment.isNodeSdk)()) {
+                var device = _constants.CONSTANTS.NODE_ADMIN ? 'AdminNode' : 'Node';
+
+                var options = {
+                    headers: {
+                        'User-Agent': "Firebase/" + _Constants.PROTOCOL_VERSION + "/" + _app2.default.SDK_VERSION + "/" + process.platform + "/" + device
+                    }
+                };
+
+                var env = process['env'];
+                var proxy = this.connURL.indexOf('wss://') == 0 ? env['HTTPS_PROXY'] || env['https_proxy'] : env['HTTP_PROXY'] || env['http_proxy'];
+                if (proxy) {
+                    options['proxy'] = { origin: proxy };
+                }
+                this.mySock = new WebSocketImpl(this.connURL, [], options);
+            } else {
+                this.mySock = new WebSocketImpl(this.connURL);
+            }
+        } catch (e) {
+            this.log_('Error instantiating WebSocket.');
+            var error = e.message || e.data;
+            if (error) {
+                this.log_(error);
+            }
+            this.onClosed_();
+            return;
+        }
+        this.mySock.onopen = function () {
+            _this.log_('Websocket connected.');
+            _this.everConnected_ = true;
+        };
+        this.mySock.onclose = function () {
+            _this.log_('Websocket connection was disconnected.');
+            _this.mySock = null;
+            _this.onClosed_();
+        };
+        this.mySock.onmessage = function (m) {
+            _this.handleIncomingFrame(m);
+        };
+        this.mySock.onerror = function (e) {
+            _this.log_('WebSocket error.  Closing connection.');
+            var error = e.message || e.data;
+            if (error) {
+                _this.log_(error);
+            }
+            _this.onClosed_();
+        };
+    };
+
+    WebSocketConnection.prototype.start = function () {};
+    WebSocketConnection.forceDisallow = function () {
+        WebSocketConnection.forceDisallow_ = true;
+    };
+    WebSocketConnection.isAvailable = function () {
+        var isOldAndroid = false;
+        if (typeof navigator !== 'undefined' && navigator.userAgent) {
+            var oldAndroidRegex = /Android ([0-9]{0,}\.[0-9]{0,})/;
+            var oldAndroidMatch = navigator.userAgent.match(oldAndroidRegex);
+            if (oldAndroidMatch && oldAndroidMatch.length > 1) {
+                if (parseFloat(oldAndroidMatch[1]) < 4.4) {
+                    isOldAndroid = true;
+                }
+            }
+        }
+        return !isOldAndroid && WebSocketImpl !== null && !WebSocketConnection.forceDisallow_;
+    };
+
+    WebSocketConnection.previouslyFailed = function () {
+        return _storage.PersistentStorage.isInMemoryStorage || _storage.PersistentStorage.get('previous_websocket_failure') === true;
+    };
+    WebSocketConnection.prototype.markConnectionHealthy = function () {
+        _storage.PersistentStorage.remove('previous_websocket_failure');
+    };
+    WebSocketConnection.prototype.appendFrame_ = function (data) {
+        this.frames.push(data);
+        if (this.frames.length == this.totalFrames) {
+            var fullMess = this.frames.join('');
+            this.frames = null;
+            var jsonMess = (0, _json.jsonEval)(fullMess);
+
+            this.onMessage(jsonMess);
+        }
+    };
+
+    WebSocketConnection.prototype.handleNewFrameCount_ = function (frameCount) {
+        this.totalFrames = frameCount;
+        this.frames = [];
+    };
+
+    WebSocketConnection.prototype.extractFrameCount_ = function (data) {
+        (0, _assert.assert)(this.frames === null, 'We already have a frame buffer');
+
+        if (data.length <= 6) {
+            var frameCount = Number(data);
+            if (!isNaN(frameCount)) {
+                this.handleNewFrameCount_(frameCount);
+                return null;
+            }
+        }
+        this.handleNewFrameCount_(1);
+        return data;
+    };
+
+    WebSocketConnection.prototype.handleIncomingFrame = function (mess) {
+        if (this.mySock === null) return;
+        var data = mess['data'];
+        this.bytesReceived += data.length;
+        this.stats_.incrementCounter('bytes_received', data.length);
+        this.resetKeepAlive();
+        if (this.frames !== null) {
+            this.appendFrame_(data);
+        } else {
+            var remainingData = this.extractFrameCount_(data);
+            if (remainingData !== null) {
+                this.appendFrame_(remainingData);
+            }
+        }
+    };
+
+    WebSocketConnection.prototype.send = function (data) {
+        this.resetKeepAlive();
+        var dataStr = (0, _json.stringify)(data);
+        this.bytesSent += dataStr.length;
+        this.stats_.incrementCounter('bytes_sent', dataStr.length);
+
+        var dataSegs = (0, _util.splitStringBySize)(dataStr, WEBSOCKET_MAX_FRAME_SIZE);
+
+        if (dataSegs.length > 1) {
+            this.sendString_(String(dataSegs.length));
+        }
+
+        for (var i = 0; i < dataSegs.length; i++) {
+            this.sendString_(dataSegs[i]);
+        }
+    };
+    WebSocketConnection.prototype.shutdown_ = function () {
+        this.isClosed_ = true;
+        if (this.keepaliveTimer) {
+            clearInterval(this.keepaliveTimer);
+            this.keepaliveTimer = null;
+        }
+        if (this.mySock) {
+            this.mySock.close();
+            this.mySock = null;
+        }
+    };
+    WebSocketConnection.prototype.onClosed_ = function () {
+        if (!this.isClosed_) {
+            this.log_('WebSocket is closing itself');
+            this.shutdown_();
+
+            if (this.onDisconnect) {
+                this.onDisconnect(this.everConnected_);
+                this.onDisconnect = null;
+            }
+        }
+    };
+
+    WebSocketConnection.prototype.close = function () {
+        if (!this.isClosed_) {
+            this.log_('WebSocket is being closed');
+            this.shutdown_();
+        }
+    };
+
+    WebSocketConnection.prototype.resetKeepAlive = function () {
+        var _this = this;
+        clearInterval(this.keepaliveTimer);
+        this.keepaliveTimer = setInterval(function () {
+            if (_this.mySock) {
+                _this.sendString_('0');
+            }
+            _this.resetKeepAlive();
+        }, Math.floor(WEBSOCKET_KEEPALIVE_INTERVAL));
+    };
+
+    WebSocketConnection.prototype.sendString_ = function (str) {
+        try {
+            this.mySock.send(str);
+        } catch (e) {
+            this.log_('Exception thrown from WebSocket.send():', e.message || e.data, 'Closing connection.');
+            setTimeout(this.onClosed_.bind(this), 0);
+        }
+    };
+
+    WebSocketConnection.responsesRequiredToBeHealthy = 2;
+
+    WebSocketConnection.healthyTimeout = 30000;
+    return WebSocketConnection;
+}();
+exports.WebSocketConnection = WebSocketConnection;

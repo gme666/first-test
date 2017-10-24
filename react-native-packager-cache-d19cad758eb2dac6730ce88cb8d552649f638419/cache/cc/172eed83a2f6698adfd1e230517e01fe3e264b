@@ -1,0 +1,21 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.XhrIoPool = undefined;
+
+var _xhrio_network = require('./xhrio_network');
+
+var XhrIoPool = function () {
+    function XhrIoPool() {}
+    XhrIoPool.prototype.createXhrIo = function () {
+        return new _xhrio_network.NetworkXhrIo();
+    };
+    return XhrIoPool;
+}();
+exports.XhrIoPool = XhrIoPool;

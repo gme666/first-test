@@ -1,0 +1,101 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof (typeof Symbol === "function" ? Symbol.iterator : "@@iterator") === "symbol" ? function (obj) {
+    return typeof obj;
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== (typeof Symbol === "function" ? Symbol.prototype : "@@prototype") ? "symbol" : typeof obj;
+};
+
+var contains = exports.contains = function contains(obj, key) {
+    return Object.prototype.hasOwnProperty.call(obj, key);
+};
+var safeGet = exports.safeGet = function safeGet(obj, key) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) return obj[key];
+};
+
+var forEach = exports.forEach = function forEach(obj, fn) {
+    for (var key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+            fn(key, obj[key]);
+        }
+    }
+};
+
+var extend = exports.extend = function extend(objTo, objFrom) {
+    forEach(objFrom, function (key, value) {
+        objTo[key] = value;
+    });
+    return objTo;
+};
+
+var clone = exports.clone = function clone(obj) {
+    return extend({}, obj);
+};
+
+var isNonNullObject = exports.isNonNullObject = function isNonNullObject(obj) {
+    return (typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) === 'object' && obj !== null;
+};
+var isEmpty = exports.isEmpty = function isEmpty(obj) {
+    for (var key in obj) {
+        return false;
+    }
+    return true;
+};
+var getCount = exports.getCount = function getCount(obj) {
+    var rv = 0;
+    for (var key in obj) {
+        rv++;
+    }
+    return rv;
+};
+var map = exports.map = function map(obj, f, opt_obj) {
+    var res = {};
+    for (var key in obj) {
+        res[key] = f.call(opt_obj, obj[key], key, obj);
+    }
+    return res;
+};
+var findKey = exports.findKey = function findKey(obj, fn, opt_this) {
+    for (var key in obj) {
+        if (fn.call(opt_this, obj[key], key, obj)) {
+            return key;
+        }
+    }
+    return undefined;
+};
+var findValue = exports.findValue = function findValue(obj, fn, opt_this) {
+    var key = findKey(obj, fn, opt_this);
+    return key && obj[key];
+};
+var getAnyKey = exports.getAnyKey = function getAnyKey(obj) {
+    for (var key in obj) {
+        return key;
+    }
+};
+var getValues = exports.getValues = function getValues(obj) {
+    var res = [];
+    var i = 0;
+    for (var key in obj) {
+        res[i++] = obj[key];
+    }
+    return res;
+};
+
+var every = exports.every = function every(obj, fn) {
+    for (var key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+            if (!fn(key, obj[key])) {
+                return false;
+            }
+        }
+    }
+    return true;
+};

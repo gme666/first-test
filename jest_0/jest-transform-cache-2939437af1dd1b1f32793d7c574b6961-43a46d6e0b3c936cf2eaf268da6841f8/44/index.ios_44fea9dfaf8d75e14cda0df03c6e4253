@@ -1,0 +1,6 @@
+6e85c30f2c4490131c1f502e300a0c4b
+var _reactNative=require('react-native');
+var _App=require('./src/App');var _App2=_interopRequireDefault(_App);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}
+
+_reactNative.AppRegistry.registerComponent('manager',function(){return _App2.default;});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGV4Lmlvcy5qcyJdLCJuYW1lcyI6WyJyZWdpc3RlckNvbXBvbmVudCJdLCJtYXBwaW5ncyI6IkFBQUE7QUFDQSw4Qjs7QUFFQSx5QkFBWUEsaUJBQVosQ0FBOEIsU0FBOUIsQ0FBeUMsaUNBQXpDIiwiZmlsZSI6ImluZGV4Lmlvcy5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IEFwcFJlZ2lzdHJ5IH0gZnJvbSAncmVhY3QtbmF0aXZlJztcbmltcG9ydCBBcHAgZnJvbSAnLi9zcmMvQXBwJztcblxuQXBwUmVnaXN0cnkucmVnaXN0ZXJDb21wb25lbnQoJ21hbmFnZXInLCAoKSA9PiBBcHApO1xuIl19

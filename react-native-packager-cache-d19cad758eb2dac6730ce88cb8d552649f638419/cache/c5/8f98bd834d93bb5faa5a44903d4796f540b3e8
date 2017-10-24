@@ -1,0 +1,32 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.StatsListener = undefined;
+
+var _obj = require('../../../utils/obj');
+
+var StatsListener = function () {
+    function StatsListener(collection_) {
+        this.collection_ = collection_;
+        this.last_ = null;
+    }
+    StatsListener.prototype.get = function () {
+        var newStats = this.collection_.get();
+        var delta = (0, _obj.clone)(newStats);
+        if (this.last_) {
+            (0, _obj.forEach)(this.last_, function (stat, value) {
+                delta[stat] = delta[stat] - value;
+            });
+        }
+        this.last_ = newStats;
+        return delta;
+    };
+    return StatsListener;
+}();
+exports.StatsListener = StatsListener;

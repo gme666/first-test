@@ -1,0 +1,62 @@
+/*! @license Firebase v4.3.1
+Build: rev-b4fe95f
+Terms: https://firebase.google.com/terms/ */
+
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.stringLength = exports.stringToByteArray = undefined;
+
+var _assert = require('./assert');
+
+var stringToByteArray = exports.stringToByteArray = function stringToByteArray(str) {
+    var out = [],
+        p = 0;
+    for (var i = 0; i < str.length; i++) {
+        var c = str.charCodeAt(i);
+
+        if (c >= 0xd800 && c <= 0xdbff) {
+            var high = c - 0xd800;
+            i++;
+            (0, _assert.assert)(i < str.length, 'Surrogate pair missing trail surrogate.');
+            var low = str.charCodeAt(i) - 0xdc00;
+            c = 0x10000 + (high << 10) + low;
+        }
+        if (c < 128) {
+            out[p++] = c;
+        } else if (c < 2048) {
+            out[p++] = c >> 6 | 192;
+            out[p++] = c & 63 | 128;
+        } else if (c < 65536) {
+            out[p++] = c >> 12 | 224;
+            out[p++] = c >> 6 & 63 | 128;
+            out[p++] = c & 63 | 128;
+        } else {
+            out[p++] = c >> 18 | 240;
+            out[p++] = c >> 12 & 63 | 128;
+            out[p++] = c >> 6 & 63 | 128;
+            out[p++] = c & 63 | 128;
+        }
+    }
+    return out;
+};
+
+var stringLength = exports.stringLength = function stringLength(str) {
+    var p = 0;
+    for (var i = 0; i < str.length; i++) {
+        var c = str.charCodeAt(i);
+        if (c < 128) {
+            p++;
+        } else if (c < 2048) {
+            p += 2;
+        } else if (c >= 0xd800 && c <= 0xdbff) {
+            p += 4;
+            i++;
+        } else {
+            p += 3;
+        }
+    }
+    return p;
+};

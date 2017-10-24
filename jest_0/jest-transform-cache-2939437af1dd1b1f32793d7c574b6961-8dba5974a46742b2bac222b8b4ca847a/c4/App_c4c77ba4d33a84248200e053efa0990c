@@ -1,0 +1,36 @@
+daafc0112726fedb86cce762ec5d2c70
+Object.defineProperty(exports,"__esModule",{value:true});var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=require('react');var _react2=_interopRequireDefault(_react);
+var _reactRedux=require('react-redux');
+var _redux=require('redux');
+var _reduxThunk=require('redux-thunk');var _reduxThunk2=_interopRequireDefault(_reduxThunk);
+var _firebase=require('firebase');var _firebase2=_interopRequireDefault(_firebase);
+var _reducers=require('./reducers');var _reducers2=_interopRequireDefault(_reducers);
+var _Router=require('./Router');var _Router2=_interopRequireDefault(_Router);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var
+
+App=function(_Component){_inherits(App,_Component);function App(){_classCallCheck(this,App);return _possibleConstructorReturn(this,(App.__proto__||Object.getPrototypeOf(App)).apply(this,arguments));}_createClass(App,[{key:'componentWillMount',value:function componentWillMount()
+{
+var config={
+apiKey:'AIzaSyAtmB8d0mn5HNgn4ADP2Ov4iExZVFX9Imo',
+authDomain:'energy-c0af4.firebaseapp.com',
+databaseURL:'https://energy-c0af4.firebaseio.com',
+projectId:'energy-c0af4',
+storageBucket:'energy-c0af4.appspot.com',
+messagingSenderId:'703932440290'};
+
+
+_firebase2.default.initializeApp(config);
+}},{key:'render',value:function render()
+
+{
+var store=(0,_redux.createStore)(_reducers2.default,{},(0,_redux.applyMiddleware)(_reduxThunk2.default));
+
+return(
+_react2.default.createElement(_reactRedux.Provider,{store:store},
+_react2.default.createElement(_Router2.default,null)));
+
+
+}}]);return App;}(_react.Component);exports.default=
+
+
+App;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkFwcC5qcyJdLCJuYW1lcyI6WyJBcHAiLCJjb25maWciLCJhcGlLZXkiLCJhdXRoRG9tYWluIiwiZGF0YWJhc2VVUkwiLCJwcm9qZWN0SWQiLCJzdG9yYWdlQnVja2V0IiwibWVzc2FnaW5nU2VuZGVySWQiLCJpbml0aWFsaXplQXBwIiwic3RvcmUiXSwibWFwcGluZ3MiOiJ1akJBQUEsNEI7QUFDQTtBQUNBO0FBQ0EsdUM7QUFDQSxrQztBQUNBLG9DO0FBQ0EsZ0M7O0FBRU1BLEc7QUFDaUI7QUFDbkIsR0FBTUMsUUFBUztBQUNiQyxPQUFRLHlDQURLO0FBRWJDLFdBQVksOEJBRkM7QUFHYkMsWUFBYSxxQ0FIQTtBQUliQyxVQUFXLGNBSkU7QUFLYkMsY0FBZSwwQkFMRjtBQU1iQyxrQkFBbUIsY0FOTixDQUFmOzs7QUFTQSxtQkFBU0MsYUFBVCxDQUF1QlAsTUFBdkI7QUFDRCxDOztBQUVRO0FBQ1AsR0FBTVEsT0FBUSwwQ0FBc0IsRUFBdEIsQ0FBMEIsZ0RBQTFCLENBQWQ7O0FBRUE7QUFDRSxvREFBVSxNQUFPQSxLQUFqQjtBQUNFLG9EQURGLENBREY7OztBQUtELEM7OztBQUdZVCxHIiwiZmlsZSI6IkFwcC5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBSZWFjdCwgeyBDb21wb25lbnQgfSBmcm9tICdyZWFjdCc7XG5pbXBvcnQgeyBQcm92aWRlciB9IGZyb20gJ3JlYWN0LXJlZHV4JztcbmltcG9ydCB7IGNyZWF0ZVN0b3JlLCBhcHBseU1pZGRsZXdhcmUgfSBmcm9tICdyZWR1eCc7XG5pbXBvcnQgUmVkdXhUaHVuayBmcm9tICdyZWR1eC10aHVuayc7XG5pbXBvcnQgZmlyZWJhc2UgZnJvbSAnZmlyZWJhc2UnO1xuaW1wb3J0IHJlZHVjZXJzIGZyb20gJy4vcmVkdWNlcnMnO1xuaW1wb3J0IFJvdXRlciBmcm9tICcuL1JvdXRlcic7XG5cbmNsYXNzIEFwcCBleHRlbmRzIENvbXBvbmVudCB7XG4gIGNvbXBvbmVudFdpbGxNb3VudCgpIHtcbiAgICBjb25zdCBjb25maWcgPSB7XG4gICAgICBhcGlLZXk6ICdBSXphU3lBdG1COGQwbW41SE5nbjRBRFAyT3Y0aUV4WlZGWDlJbW8nLFxuICAgICAgYXV0aERvbWFpbjogJ2VuZXJneS1jMGFmNC5maXJlYmFzZWFwcC5jb20nLFxuICAgICAgZGF0YWJhc2VVUkw6ICdodHRwczovL2VuZXJneS1jMGFmNC5maXJlYmFzZWlvLmNvbScsXG4gICAgICBwcm9qZWN0SWQ6ICdlbmVyZ3ktYzBhZjQnLFxuICAgICAgc3RvcmFnZUJ1Y2tldDogJ2VuZXJneS1jMGFmNC5hcHBzcG90LmNvbScsXG4gICAgICBtZXNzYWdpbmdTZW5kZXJJZDogJzcwMzkzMjQ0MDI5MCdcbiAgICB9O1xuXG4gICAgZmlyZWJhc2UuaW5pdGlhbGl6ZUFwcChjb25maWcpO1xuICB9XG5cbiAgcmVuZGVyKCkge1xuICAgIGNvbnN0IHN0b3JlID0gY3JlYXRlU3RvcmUocmVkdWNlcnMsIHt9LCBhcHBseU1pZGRsZXdhcmUoUmVkdXhUaHVuaykpO1xuXG4gICAgcmV0dXJuIChcbiAgICAgIDxQcm92aWRlciBzdG9yZT17c3RvcmV9PlxuICAgICAgICA8Um91dGVyIC8+XG4gICAgICA8L1Byb3ZpZGVyPlxuICAgICk7XG4gIH1cbn1cblxuZXhwb3J0IGRlZmF1bHQgQXBwO1xuIl19
